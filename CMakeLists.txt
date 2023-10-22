@@ -24,6 +24,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 include(GoogleTest)
 
+
 #
 # Doxygen Support check if Doxygen is installed
 # ref: https://cmake.org/cmake/help/latest/module/FindDoxygen.html

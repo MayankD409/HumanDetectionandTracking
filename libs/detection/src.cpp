@@ -27,6 +27,7 @@ DetectionClass::DetectionClass(const std::string& modelPath, const std::string& 
  */
 DetectionClass::~DetectionClass() {
     // Destructor implementation (if any)
+    videoCapture.release();
 }
 
 /**
@@ -38,6 +39,11 @@ bool DetectionClass::initVideoStream(int deviceID) {
     // Function implementation
     // Initialize the video stream from the specified device (camera)
     // Return true if successfully opened, false otherwise
+    if (!videoCapture.open(deviceID)) {
+        return false;
+    }
+
+    return true;
 }
 
 /**
@@ -48,4 +54,7 @@ std::vector<cv::Rect> DetectionClass::detectFaces() {
     // Function implementation
     // Process a frame from the video stream and perform face detection
     // Return a vector of cv::Rect representing detected faces
+    std::vector<cv::Rect> detections;
+
+    return detections;
 }

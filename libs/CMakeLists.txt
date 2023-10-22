@@ -1,4 +1,5 @@
 
-add_subdirectory (lib1)
-add_subdirectory (lib2)
+add_subdirectory (tracking)
+add_subdirectory (detection)
+add_subdirectory (displaying)
 

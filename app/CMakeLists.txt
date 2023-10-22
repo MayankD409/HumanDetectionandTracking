@@ -20,7 +20,7 @@ target_link_libraries(human-tracker PUBLIC
   myLib3
   )
 
-target_link_options(human-tracker PUBLIC
-  --static
-  )
+# target_link_options(human-tracker PUBLIC
+#   --static
+#   )
   

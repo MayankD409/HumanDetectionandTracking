@@ -1,3 +1,15 @@
+/**
+ * @file detection.hpp
+ * @author Lowell Lobo
+ * @author Mayank Deshpande
+ * @author Kautilya Chappidi
+ * @brief Class Definition for DetectionClass
+ * @version 0.1
+ * @date 2023-10-22
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #ifndef DETECTION_HPP
 #define DETECTION_HPP
 

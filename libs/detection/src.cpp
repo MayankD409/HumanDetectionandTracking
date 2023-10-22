@@ -1,3 +1,15 @@
+/**
+ * @file src.cpp
+ * @author Lowell Lobo
+ * @author Mayank Deshpande
+ * @author Kautilya Chappidi
+ * @brief Class declaration for the DetectionClass
+ * @version 0.1
+ * @date 2023-10-22
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 #include "detection.hpp"
 
 /**

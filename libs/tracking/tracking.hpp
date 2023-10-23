@@ -18,6 +18,7 @@
 #include <opencv2/highgui.hpp>
 #include <string>
 
+class DetectionClass;
 /**
  * @class TrackingClass
  * @brief A class for Tracking Subjects on the Frame.
@@ -27,10 +28,11 @@
  */
 class TrackingClass {
  public:
+  std::vector<std::map<int, cv::Rect>> obstacleMapVector;
   /**
    * @brief Constructor for TrackingClass.
    */
-  TrackingClass();
+  TrackingClass(const std::string& modelPath, const std::string& configPath);
 
   /**
    * @brief Destructor for TrackingClass.
@@ -39,38 +41,41 @@ class TrackingClass {
 
   /**
    * @brief Finds the depth of an object.
+   * The function will be called by distFromCamera() to get the 
    * @return Depth value.
    */
-  double find_depth();
+  double findDepth();
 
  private:
+  DetectionClass image;
+
   /**
    * @brief Assigns IDs to objects.
    * @return A map containing object IDs and descriptions.
+   * The function is called after face detection.
+   * The function assigns unique IDs in the first iteration of face detection.
+   * In subsequent iterations, the function will compare the the current obstacleMapVector with the
+   * new face detection and assign IDs to the new bounding box based on minimum Euclidean Distance
    */
-  std::map<int, std::string> assignID();
+ std::vector<std::map<int, cv::Rect>> assignIDAndTrack(const std::vector<cv::Rect>& detections);
 
   /**
    * @brief Calculates the distance of an object from the camera.
-   * @return A tuple containing object ID, distance, and description.
+   * @return A vector containing the ID and a tuple containing x distance, y distance, and z distance
+   * of the corresponding ID.
+   * The function computes the x and y distance and calls findDepth() to get the z distance.
    */
-  std::tuple<int, double, std::string> distFromCamera();
+  std::vector<int, std::tuple<double, double, double>> distFromCamera();
 
   /**
    * @brief Calculates the distance of an object from a car.
+   * The function takes in distance from camera frame and performs a transformation to get the distance
+   * from robot frame.
    * @param inputTuple Input tuple containing object information.
-   * @param intOffset Integer offset.
-   * @param doubleOffset Double offset.
-   * @return A tuple containing object ID, distance, and description.
+   * @return A tuple containing x distance, y distance, and z distance from robot reference frame.
    */
-  std::tuple<int, double, std::string> distFromCar(
-      const std::tuple<int, double, std::string>& inputTuple, int intOffset,
-      double doubleOffset);
-
-  /**
-   * @brief Starts object tracking.
-   */
-  void track();
+  std::tuple<double, double, double> distFromCar(
+      const std::tuple<double, double, double>& inputTuple);
 };
 
 #endif

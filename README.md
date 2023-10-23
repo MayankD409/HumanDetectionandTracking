@@ -1,9 +1,63 @@
 
+# Overview
+
+Perception is essential for object detection, environmental awareness, path planning and control; through perception, a system can truly be considered autonomous. Acme requires the development of a perception component in its autonomous car system, and a human obstacle detection and tracking module needs to be built.
+The aim is to build a perception module to detect human objects and track their location directly into the robot reference frame.
+The location will first be found with respect to the camera's reference frame and then using a transformation, the location with respect to the robot reference frame will be found.
+The module is built such that, the system that implements it will consists of a camera mounted on a car that will keep track of human motion within the camera’s field of view. But the module will be unable to handle occlusion cases.
+
+## Assumption
+
+The camera used for perception will be placed on the top of the car. The camera reference frame is taken such that the z-axis is pointing out of the lens, the x-axis is to the right, and the y-axis is pointing downward. The robot reference frame is at the centre of mass where the z-axis points upward, and the x-axis is to the right, and the y-axis points straight ahead. We assume the camera is monocular, and the user must input most of the configuration information
+
+## Features
+
+ - Detection of human obstacles and tracking using monocular camera
+ - Location of human obstacle with respect to robot reference frame
+ - DisplayClass to implement and test the module
+
+## Deliverables
+
+ - C++ library/API for human obstacle and tracking
+ - GitHub Repository with CI and CodeCov
+ - UML and Dependency Diagrams
+ - Doxygen Documentation
+
+## Constraints
+
+The module uses a monocular camera and is unable to handle occlusions. Also, the monocular camera cannot perform precise depth calculation and thus would require a deep learning model for accurate estimation. The runtime fps and memory management depend on the physical constraints of the system.
+
+
+# Personnel
+
+Kautilya Chappiddi:-
+Graduate Student in Enginnering - Robotics at University of Maryland, College Park
+
+Lowell Lobo:-
+Graduate Student in Enginnering - Robotics at University of Maryland, College Park
+
+Mayank Deshpande:-
+Graduate Student in Enginnering - Robotics at University of Maryland, College Park
+
+# Links
+[AIP Google Sheet](https://docs.google.com/spreadsheets/d/17q5Q-qL-ZU2LQK8llQSjsIJ8_037MAFyNenNofpY_PI/edit#gid=0)
+
+[Sprint Notes](https://docs.google.com/document/d/1UX6oGidNdux2FeOGgIjD-ivvmi8oCiHlf1OJARla3Ro/edit)
+
+
+# Process
+
+The project development will be executed using pair programming concepts. For all specific tasks, driver and navigator roles will be swapped. 
+The project will follow AIP concepts and be performed using Pair Programming. The module works such that a video is fed into the system using the monocular camera. 
+The program then converts the video stream into image frames and performs human obstacle detection. 
+Once obstacles are found in the image frame, unique IDs are assigned to the objects, which will hold the calculated current location with respect to the robot reference frame. 
+The process is repeated over time for tracking of obstacle movement.
+Testing of components is performed using GoogleTest, and system testing will be performed every iteration for overall functionality verification.
+
+
+
 ## Standard install via command-line
 ```bash
-# Download the code:
-  git clone https://github.com/TommyChangUMD/cpp-boilerplate-v2
-  cd cpp-boilerplate-v2
 # Configure the project and generate a native build system:
   # Must re-run this command whenever any CMakeLists.txt file has been changed.
   cmake -S ./ -B build/
@@ -15,7 +69,7 @@
   # to see verbose output, do:
   cmake --build build/ --verbose
 # Run program:
-  ./build/app/shell-app
+  ./build/app/human-tracker
 # Run tests:
   cd build/; ctest; cd -
   # or if you have newer cmake
@@ -112,109 +166,9 @@ report.  You should also see the source file listing.  If not, you may
 need to login your codecov account first.
 
 
-## Working with C++ IDE and LSP
-
-You must set up clangd and use it with the C++ IDE of your choice. Most people use Visual Studio Code, but if you are using some other IDE, be sure to check if it supports the Language Server Protocol (LSP).
-
-ref: https://clangd.llvm.org/installation.html
-
-
-### clangd C++ language server setup
-
-Run the [provided bash script][config-clangd.bash] or manually create the `~/.config/clangd/config.yaml` file with the following content:
-
-[config-clangd.bash]: https://raw.githubusercontent.com/TommyChangUMD/cpp-boilerplate-v2/main/scripts/config-clangd.bash
-
-```
-Diagnostics:
-  UnusedIncludes: Strict
-
-CompileFlags:
-  # Treat code as C++, use C++17 standard, enable more warnings.
-  # Add: [-xc++, -std=c++17, -Wall, -Wno-missing-prototypes]
-  Add: [-std=c++17]
-
-  # Get rid of error [drv_unknown_argument]: Unknown argument: '-fprofile-abs-path'
-  Remove: [-fprofile-abs-path]
-```
-
-This configuration instructs clangd to use C++-17 standard and catch any unused include files.  You are welcome to customize it further.   See https://clangd.llvm.org/config for more info.
-
-### Visual studio code C++ IDE setup
-
-Download vscode from https://code.visualstudio.com/docs/?dv=linux64_deb.
-
-To install and it on your Ubuntu, do
-
-``` bash
-cd ~/Downloads
-sudo dpkg -i code_1.81.1-1691620686_amd64.deb
-code
-```
-
-Now, you must configure it to use clangd. Follow the instructions at https://clangd.llvm.org/installation.html#editor-plugins and look for "Visual Studio Code" under the `Editor plugins` section.
-
-See https://github.com/clangd/vscode-clangd for more info.
-
-### Emacs C++ IDE setup
-
-If you use Emacs as your C++ IDE, then install eglot and supporting packages:
-``` lisp
-(package-initialize)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(package-refresh-contents)
-(setq package-selected-packages '(eglot yasnippet company markdown-mode yasnippet-snippets cpp-auto-include))
-(package-install-selected-packages)
-
-```
-
-Add to ~/.emacs:
-
-``` lisp
-(require 'eglot)
-(add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
-```
-
-See https://joaotavora.github.io/eglot/ for more info.
-
-
-
-## Verify C++ IDE and LSP are working
-
-clangd will automatically run (in the background) when invoked by the IDE. To verify that it's running correctly, you just need to check if the IDE can perform features such as code completion, finding declarations, references, definitions, and symbols, etc.
-
-However, for clangd to work properly, it must ab able to find a file called `compile_commands.json` somewhere in your source code tree.  There are many ways to generate this compilation database file.  CMake can generate it for you already (this is done by using `CMAKE_EXPORT_COMPILE_COMMANDS` option).   Everytime you invoke the configuration command `cmake -S ./ -B build/`, cpp-boilerplate-v2 creates a symbolic link to the `compile_commands.json` file.
-
-``` bash
-  # generate compile_commands.json
-  cmake -S ./ -B build/
-  # verify compile_commands.json has been generated
-  ls -l compile_commands.json
-  cat compile_commands.json
-```
-
-Alternatively, a program called `bear` can also be used to create `compile_commands.json`, regardless of the C++ build system you are using. It does this by intercepting subsequent command-line commands and collecting all C++ compilation flags passed to the compiler.  To use this approach, prepend `bear --` at the beginning of the build command.   For CMake, you can do:
-
 ``` bash
 # build compile_commands.json from scratch
   bear -- cmake --build build/ --clean-first
 # or, update the existing compile_commands.json
   bear --append -- cmake --build build/
 ```
-
-Either way, this should produce the `compile_commands.json` file.  Now, you can use it with the IDE.
-
-### Visual studio code
-1. Open `cpp-boilerplate-v2/app/main.cpp`
-
-1. Move the cursor to the `dummy()` function call and press the F12 key (or right-click->Go to Definition).  Visual studio code should automatically open `cpp-boilerplate-v2/include/lib.hpp` and place the curse at line 5, where the `dummy` function is defined.
-
-1. Close the editor, delete the `compile_commands.json` file and repeat.  Verify that *step 2 does not work anymore*.
-
-### Emacs
-
-1. Open `cpp-boilerplate-v2/app/main.cpp` and start `eglot` if it's not already running.
-
-1. Move the cursor to the `dummy()` function call and press the `<M-.>` key (or xref-find-definitions).  Emacs should automatically open `cpp-boilerplate-v2/include/lib.hpp` and place the curse at line 5, where the `dummy` function is defined.
-
-1. Close the editor, delete the `compile_commands.json` file and repeat.  Verify that *step 2 does not work anymore*.

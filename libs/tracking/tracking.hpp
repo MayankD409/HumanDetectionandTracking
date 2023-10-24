@@ -29,6 +29,11 @@
  */
 class TrackingClass {
  public:
+  /**
+   * @brief Vector that holds the position of all obstacles found in image
+   * frame after assigning unique IDs
+   *
+   */
   std::vector<std::map<int, cv::Rect>> obstacleMapVector;
   /**
    * @brief Constructor for TrackingClass.
@@ -82,6 +87,11 @@ class TrackingClass {
       const std::tuple<double, double, double>& inputTuple);
 
  private:
+  /**
+   * @brief Object of class DetectionClass (part-of relation), used to access
+   * the video stream and get detection of obstacles.
+   *
+   */
   DetectionClass image;
 };
 

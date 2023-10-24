@@ -26,8 +26,16 @@
 #include "displaying.hpp"
 #include "tracking.hpp"
 
+/**
+ * @brief static TrackingClass object to be used in the unit test
+ * 
+ */
 static TrackingClass obj_("abc", "def");
 
+/**
+ * @brief Construct a new TEST object.
+ * unit test for checking the initVideoStream method of class DetectionClass
+ */
 TEST(unit_test_initialise_VideoStream, this_should_pass) {
   DetectionClass obj("abc", "def");
   bool val = obj.initVideoStream(0);
@@ -35,6 +43,10 @@ TEST(unit_test_initialise_VideoStream, this_should_pass) {
   EXPECT_TRUE(val);
 }
 
+/**
+ * @brief Construct a new TEST object.
+ * unit test for checking the detectFaces method of class DetectionClass
+ */
 TEST(unit_test_detect_faces, this_should_pass) {
   DetectionClass obj("abc", "def");
   obj.initVideoStream(0);
@@ -43,6 +55,10 @@ TEST(unit_test_detect_faces, this_should_pass) {
   EXPECT_GT(val.size(), 0);
 }
 
+/**
+ * @brief Construct a new TEST object.
+ * unit test for checking the assignIDAndTrack method of class TrackingClass
+ */
 TEST(unit_test_assign_ID, this_should_pass) {
   DetectionClass obj("abc", "def");
   obj.initVideoStream(0);
@@ -52,6 +68,10 @@ TEST(unit_test_assign_ID, this_should_pass) {
   EXPECT_GT(ids.size(), 0);
 }
 
+/**
+ * @brief Construct a new TEST object.
+ * unit test for checking the distFromCamera method of class TrackingClass
+ */
 TEST(unit_test_dist_from_camera, this_should_pass) {
   DetectionClass obj("abc", "def");
   obj.initVideoStream(0);
@@ -62,6 +82,10 @@ TEST(unit_test_dist_from_camera, this_should_pass) {
   EXPECT_GT(distCamera.size(), 0);
 }
 
+/**
+ * @brief Construct a new TEST object.
+ * unit test for checking the distFromCar method of class TrackingClass
+ */
 TEST(unit_test_dist_from_car, this_should_pass) {
   DetectionClass obj("abc", "def");
   obj.initVideoStream(0);
@@ -74,6 +98,10 @@ TEST(unit_test_dist_from_car, this_should_pass) {
             0);
 }
 
+/**
+ * @brief Construct a new TEST object.
+ * unit test for checking the findDepth method of class TrackingClass
+ */
 TEST(unit_test_find_depth, this_should_pass) {
   DetectionClass obj("abc", "def");
   obj.initVideoStream(0);
@@ -84,6 +112,10 @@ TEST(unit_test_find_depth, this_should_pass) {
   EXPECT_NEAR(depth, 5, 0.001);
 }
 
+/**
+ * @brief Construct a new TEST object.
+ * unit test for checking the drawObjectLocations method of class DisplayClass
+ */
 TEST(unit_test_draw_object, this_should_pass) {
   cv::Mat rect = cv::Mat::zeros(1, 1, CV_64F);
   std::vector<std::tuple<int, cv::Rect>> draw = {{1, cv::Rect(1, 1, 5, 5)}};

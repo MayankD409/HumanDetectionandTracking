@@ -1,0 +1,225 @@
+\hypertarget{classTrackingClass}{}\doxysection{Tracking\+Class Class Reference}
+\label{classTrackingClass}\index{TrackingClass@{TrackingClass}}
+
+
+A class for Tracking Subjects on the Frame.  
+
+
+
+
+{\ttfamily \#include $<$tracking.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTrackingClass_a84eb969f8577a37a479e21730f8fb2fb}{Tracking\+Class}} (const std\+::string \&detect\+Model\+Path, const std\+::string \&detect\+Config\+Path)
+\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{classTrackingClass}{Tracking\+Class}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classTrackingClass_a19459d6537193faf2d0a551acec4e71e}{$\sim$\+Tracking\+Class}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for \mbox{\hyperlink{classTrackingClass}{Tracking\+Class}}. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classTrackingClass_a1478e0985e7240444a6cd28dc3b094b6}{find\+Depth}} (int id)
+\begin{DoxyCompactList}\small\item\em Finds the depth of an object. The function will be called by \mbox{\hyperlink{classTrackingClass_a633ca631428dafc1e9e3f147dad23b79}{dist\+From\+Camera()}} to get the. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::map$<$ int, cv\+::\+Rect $>$ $>$ \mbox{\hyperlink{classTrackingClass_a878c6806a80112b6bcceb03444994436}{assign\+IDAnd\+Track}} (const std\+::vector$<$ cv\+::\+Rect $>$ \&detections)
+\begin{DoxyCompactList}\small\item\em Assigns IDs to objects. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::map$<$ int, std\+::tuple$<$ double, double, double $>$ $>$ $>$ \mbox{\hyperlink{classTrackingClass_a633ca631428dafc1e9e3f147dad23b79}{dist\+From\+Camera}} ()
+\begin{DoxyCompactList}\small\item\em Calculates the distance of an object from the camera. \end{DoxyCompactList}\item 
+std\+::tuple$<$ double, double, double $>$ \mbox{\hyperlink{classTrackingClass_a81c28e8798a46b3bc39009eeab871a63}{dist\+From\+Car}} (const std\+::tuple$<$ double, double, double $>$ \&input\+Tuple)
+\begin{DoxyCompactList}\small\item\em Calculates the distance of an object from a car. The function takes in distance from camera frame and performs a transformation to get the distance from robot frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTrackingClass_a4acd0e322114044b06fb1c77698c5729}\label{classTrackingClass_a4acd0e322114044b06fb1c77698c5729}} 
+std\+::vector$<$ std\+::map$<$ int, cv\+::\+Rect $>$ $>$ \mbox{\hyperlink{classTrackingClass_a4acd0e322114044b06fb1c77698c5729}{obstacle\+Map\+Vector}}
+\begin{DoxyCompactList}\small\item\em Vector that holds the position of all obstacles found in image frame after assigning unique IDs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class for Tracking Subjects on the Frame. 
+
+This class takes the Image Frames as an inout and will track any Human subjects as and when they are detected in the frame 
+
+Definition at line 30 of file tracking.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTrackingClass_a84eb969f8577a37a479e21730f8fb2fb}\label{classTrackingClass_a84eb969f8577a37a479e21730f8fb2fb}} 
+\index{TrackingClass@{TrackingClass}!TrackingClass@{TrackingClass}}
+\index{TrackingClass@{TrackingClass}!TrackingClass@{TrackingClass}}
+\doxysubsubsection{\texorpdfstring{TrackingClass()}{TrackingClass()}}
+{\footnotesize\ttfamily Tracking\+Class\+::\+Tracking\+Class (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{detect\+Model\+Path,  }\item[{const std\+::string \&}]{detect\+Config\+Path }\end{DoxyParamCaption})}
+
+
+
+Constructor for \mbox{\hyperlink{classTrackingClass}{Tracking\+Class}}. 
+
+Default constructor. 
+
+Definition at line 18 of file src.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{20     : image(detectModelPath, detectConfigPath) \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classTrackingClass_a19459d6537193faf2d0a551acec4e71e}\label{classTrackingClass_a19459d6537193faf2d0a551acec4e71e}} 
+\index{TrackingClass@{TrackingClass}!````~TrackingClass@{$\sim$TrackingClass}}
+\index{````~TrackingClass@{$\sim$TrackingClass}!TrackingClass@{TrackingClass}}
+\doxysubsubsection{\texorpdfstring{$\sim$TrackingClass()}{~TrackingClass()}}
+{\footnotesize\ttfamily Tracking\+Class\+::$\sim$\+Tracking\+Class (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor for \mbox{\hyperlink{classTrackingClass}{Tracking\+Class}}. 
+
+Default Destructor. 
+
+Definition at line 25 of file src.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{25 \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classTrackingClass_a878c6806a80112b6bcceb03444994436}\label{classTrackingClass_a878c6806a80112b6bcceb03444994436}} 
+\index{TrackingClass@{TrackingClass}!assignIDAndTrack@{assignIDAndTrack}}
+\index{assignIDAndTrack@{assignIDAndTrack}!TrackingClass@{TrackingClass}}
+\doxysubsubsection{\texorpdfstring{assignIDAndTrack()}{assignIDAndTrack()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::map$<$ int, cv\+::\+Rect $>$ $>$ Tracking\+Class\+::assign\+IDAnd\+Track (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ cv\+::\+Rect $>$ \&}]{detections }\end{DoxyParamCaption})}
+
+
+
+Assigns IDs to objects. 
+
+Assigns IDs to objects in the scene.
+
+\begin{DoxyReturn}{Returns}
+A map containing object IDs and descriptions. The function is called after face detection. The function assigns unique IDs in the first iteration of face detection. In subsequent iterations, the function will compare the the current obstacle\+Map\+Vector with the new face detection and assign IDs to the new bounding box based on minimum Euclidean Distance
+
+A map of object IDs to object names. 
+\end{DoxyReturn}
+
+
+Definition at line 37 of file src.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{38                                          \{}
+\DoxyCodeLine{39   std::vector<std::map<int, cv::Rect>> assignedID;}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41   \textcolor{keywordflow}{return} assignedID;}
+\DoxyCodeLine{42 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classTrackingClass_a633ca631428dafc1e9e3f147dad23b79}\label{classTrackingClass_a633ca631428dafc1e9e3f147dad23b79}} 
+\index{TrackingClass@{TrackingClass}!distFromCamera@{distFromCamera}}
+\index{distFromCamera@{distFromCamera}!TrackingClass@{TrackingClass}}
+\doxysubsubsection{\texorpdfstring{distFromCamera()}{distFromCamera()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::map$<$ int, std\+::tuple$<$ double, double, double $>$ $>$ $>$ Tracking\+Class\+::dist\+From\+Camera (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calculates the distance of an object from the camera. 
+
+Calculates the distance between an object and the camera.
+
+\begin{DoxyReturn}{Returns}
+A vector containing the ID and a tuple containing x distance, y distance, and z distance of the corresponding ID. The function computes the x and y distance and calls \mbox{\hyperlink{classTrackingClass_a1478e0985e7240444a6cd28dc3b094b6}{find\+Depth()}} to get the z distance.
+
+A tuple containing the object ID, distance in meters, and object name. 
+\end{DoxyReturn}
+
+
+Definition at line 51 of file src.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{51                               \{}
+\DoxyCodeLine{52   std::vector<std::map<int, std::tuple<double, double, double>>> distances;}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54   \textcolor{keywordflow}{return} distances;}
+\DoxyCodeLine{55 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classTrackingClass_a81c28e8798a46b3bc39009eeab871a63}\label{classTrackingClass_a81c28e8798a46b3bc39009eeab871a63}} 
+\index{TrackingClass@{TrackingClass}!distFromCar@{distFromCar}}
+\index{distFromCar@{distFromCar}!TrackingClass@{TrackingClass}}
+\doxysubsubsection{\texorpdfstring{distFromCar()}{distFromCar()}}
+{\footnotesize\ttfamily std\+::tuple$<$ double, double, double $>$ Tracking\+Class\+::dist\+From\+Car (\begin{DoxyParamCaption}\item[{const std\+::tuple$<$ double, double, double $>$ \&}]{input\+Tuple }\end{DoxyParamCaption})}
+
+
+
+Calculates the distance of an object from a car. The function takes in distance from camera frame and performs a transformation to get the distance from robot frame. 
+
+Calculates the distance between an object and the car.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+Tuple} & Input tuple containing object information. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing x distance, y distance, and z distance from robot reference frame.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em input\+Tuple} & A tuple containing the object ID, distance in meters, and object name of the other object. \\
+\hline
+{\em int\+Offset} & An offset to add to the object ID. \\
+\hline
+{\em double\+Offset} & An offset to add to the distance in meters.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A tuple containing the object ID, distance in meters, and object name of the object being calculated. 
+\end{DoxyReturn}
+
+
+Definition at line 68 of file src.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{69                                                         \{}
+\DoxyCodeLine{70   \textcolor{keywordflow}{return} std::tuple<double, double, double>(0, 0, 0);}
+\DoxyCodeLine{71 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classTrackingClass_a1478e0985e7240444a6cd28dc3b094b6}\label{classTrackingClass_a1478e0985e7240444a6cd28dc3b094b6}} 
+\index{TrackingClass@{TrackingClass}!findDepth@{findDepth}}
+\index{findDepth@{findDepth}!TrackingClass@{TrackingClass}}
+\doxysubsubsection{\texorpdfstring{findDepth()}{findDepth()}}
+{\footnotesize\ttfamily double Tracking\+Class\+::find\+Depth (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Finds the depth of an object. The function will be called by \mbox{\hyperlink{classTrackingClass_a633ca631428dafc1e9e3f147dad23b79}{dist\+From\+Camera()}} to get the. 
+
+Finds the depth of an object in the scene.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The ID of the bounding box whose depth needs to be found \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Depth value.
+
+The depth of the object in meters. 
+\end{DoxyReturn}
+
+
+Definition at line 31 of file src.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{31 \{ \textcolor{keywordflow}{return} 0.0; \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+libs/tracking/\mbox{\hyperlink{tracking_8hpp}{tracking.\+hpp}}\item 
+libs/tracking/\mbox{\hyperlink{tracking_2src_8cpp}{src.\+cpp}}\end{DoxyCompactItemize}

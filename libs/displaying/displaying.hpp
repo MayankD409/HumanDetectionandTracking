@@ -14,36 +14,40 @@
 #define DISPLAY_HPP
 
 #include <opencv2/core.hpp>
-#include <vector>
-#include <tuple>
 #include <string>
+#include <tuple>
+#include <vector>
 
 /**
  * @class DisplayClass
- * @brief A class for displaying object locations and additional information on the video stream.
+ * @brief A class for displaying object locations and additional information on
+ * the video stream.
  *
  * This class provides functions to draw bounding boxes around detected objects
  * and display additional information on top of the bounding boxes.
  */
 class DisplayClass {
-public:
-    /**
-     * @brief Default constructor.
-     */
-    DisplayClass();
+ public:
+  /**
+   * @brief Default constructor.
+   */
+  DisplayClass();
 
-    /**
-     * @brief Default destructor.
-     */
-    ~DisplayClass();
+  /**
+   * @brief Default destructor.
+   */
+  ~DisplayClass();
 
-    /**
-     * @brief Draws object locations and additional information on the video frame.
-     * @param frame The input video frame.
-     * @param objectLocations Vector of tuples containing object ID, bounding box
-     * @return Modified video frame with bounding boxes and object information.
-     */
-    cv::Mat drawObjectLocations(const cv::Mat& frame, const std::vector<std::tuple<int, cv::Rect>>& objectLocations);
+  /**
+   * @brief Draws object locations and additional information on the video
+   * frame.
+   * @param frame The input video frame.
+   * @param objectLocations Vector of tuples containing object ID, bounding box
+   * @return Modified video frame with bounding boxes and object information.
+   */
+  cv::Mat drawObjectLocations(
+      const cv::Mat& frame,
+      const std::vector<std::tuple<int, cv::Rect>>& objectLocations);
 };
 
-#endif // DISPLAY_HPP
+#endif  // DISPLAY_HPP

@@ -15,9 +15,9 @@
 /**
  * @brief Default constructor.
  */
-TrackingClass::TrackingClass(const std::string& detectModelPath, const std::string& detectConfigPath) 
-: image(detectModelPath, detectConfigPath) {}
-
+TrackingClass::TrackingClass(const std::string& detectModelPath,
+                             const std::string& detectConfigPath)
+    : image(detectModelPath, detectConfigPath) {}
 
 /**
  * @brief Default Destructor.
@@ -34,9 +34,10 @@ double TrackingClass::findDepth(int id) { return 0.0; }
  * @brief Assigns IDs to objects in the scene.
  * @return A map of object IDs to object names.
  */
-std::vector<std::map<int, cv::Rect>> TrackingClass::assignIDAndTrack(const std::vector<cv::Rect> &detections) {
+std::vector<std::map<int, cv::Rect>> TrackingClass::assignIDAndTrack(
+    const std::vector<cv::Rect>& detections) {
   std::vector<std::map<int, cv::Rect>> assignedID;
-  
+
   return assignedID;
 }
 
@@ -46,7 +47,8 @@ std::vector<std::map<int, cv::Rect>> TrackingClass::assignIDAndTrack(const std::
  * @return A tuple containing the object ID, distance in meters, and object
  * name.
  */
-std::vector<std::map<int, std::tuple<double, double, double>>> TrackingClass::distFromCamera() {
+std::vector<std::map<int, std::tuple<double, double, double>>>
+TrackingClass::distFromCamera() {
   std::vector<std::map<int, std::tuple<double, double, double>>> distances;
 
   return distances;
@@ -64,7 +66,6 @@ std::vector<std::map<int, std::tuple<double, double, double>>> TrackingClass::di
  * of the object being calculated.
  */
 std::tuple<double, double, double> TrackingClass::distFromCar(
-    const std::tuple<double, double, double> &inputTuple) {
+    const std::tuple<double, double, double>& inputTuple) {
   return std::tuple<double, double, double>(0, 0, 0);
 }
-

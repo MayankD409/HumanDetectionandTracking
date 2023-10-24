@@ -17,6 +17,7 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <string>
+
 #include "detection.hpp"
 
 /**
@@ -32,7 +33,8 @@ class TrackingClass {
   /**
    * @brief Constructor for TrackingClass.
    */
-  TrackingClass(const std::string& detectModelPath, const std::string& detectConfigPath);
+  TrackingClass(const std::string& detectModelPath,
+                const std::string& detectConfigPath);
 
   /**
    * @brief Destructor for TrackingClass.
@@ -41,7 +43,7 @@ class TrackingClass {
 
   /**
    * @brief Finds the depth of an object.
-   * The function will be called by distFromCamera() to get the 
+   * The function will be called by distFromCamera() to get the
    * @param id The ID of the bounding box whose depth needs to be found
    * @return Depth value.
    */
@@ -52,32 +54,35 @@ class TrackingClass {
    * @return A map containing object IDs and descriptions.
    * The function is called after face detection.
    * The function assigns unique IDs in the first iteration of face detection.
-   * In subsequent iterations, the function will compare the the current obstacleMapVector with the
-   * new face detection and assign IDs to the new bounding box based on minimum Euclidean Distance
+   * In subsequent iterations, the function will compare the the current
+   * obstacleMapVector with the new face detection and assign IDs to the new
+   * bounding box based on minimum Euclidean Distance
    */
- std::vector<std::map<int, cv::Rect>> assignIDAndTrack(const std::vector<cv::Rect>& detections);
+  std::vector<std::map<int, cv::Rect>> assignIDAndTrack(
+      const std::vector<cv::Rect>& detections);
 
   /**
    * @brief Calculates the distance of an object from the camera.
-   * @return A vector containing the ID and a tuple containing x distance, y distance, and z distance
-   * of the corresponding ID.
-   * The function computes the x and y distance and calls findDepth() to get the z distance.
+   * @return A vector containing the ID and a tuple containing x distance, y
+   * distance, and z distance of the corresponding ID. The function computes the
+   * x and y distance and calls findDepth() to get the z distance.
    */
-  std::vector<std::map<int, std::tuple<double, double, double>>> distFromCamera();
+  std::vector<std::map<int, std::tuple<double, double, double>>>
+  distFromCamera();
 
   /**
    * @brief Calculates the distance of an object from a car.
-   * The function takes in distance from camera frame and performs a transformation to get the distance
-   * from robot frame.
+   * The function takes in distance from camera frame and performs a
+   * transformation to get the distance from robot frame.
    * @param inputTuple Input tuple containing object information.
-   * @return A tuple containing x distance, y distance, and z distance from robot reference frame.
+   * @return A tuple containing x distance, y distance, and z distance from
+   * robot reference frame.
    */
   std::tuple<double, double, double> distFromCar(
       const std::tuple<double, double, double>& inputTuple);
 
-private:
+ private:
   DetectionClass image;
-  
 };
 
 #endif

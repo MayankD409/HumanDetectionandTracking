@@ -1,3 +1,5 @@
+![CICD Workflow status](https://github.com/MayankD409/Human_Tracking_CPP/actions/workflows/run-unit-test-and-upload-codecov.yml/badge.svg) [![codecov](https://codecov.io/gh/MayankD409/Human_Tracking_CPP/graph/badge.svg?token=WUFHUBTG05)](https://codecov.io/gh/MayankD409/Human_Tracking_CPP) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 
 # Overview
 

@@ -31,12 +31,15 @@ The module uses a monocular camera and is unable to handle occlusions. Also, the
 # Personnel
 
 Kautilya Chappiddi:-
+<br>
 Graduate Student in Enginnering - Robotics at University of Maryland, College Park
 
 Lowell Lobo:-
+<br>
 Graduate Student in Enginnering - Robotics at University of Maryland, College Park
 
 Mayank Deshpande:-
+<br>
 Graduate Student in Enginnering - Robotics at University of Maryland, College Park
 
 # Links
@@ -124,7 +127,7 @@ It consists of one method:-
 ```
 
 ## Alternate method to make & view Doxygen Documentation
-# Download & Build Doxygen
+### Download & Build Doxygen
 ```bash
 # Download doxygen
   sudo apt-get install doxygen
@@ -133,7 +136,7 @@ It consists of one method:-
 ```
 
 
-## Building for code coverage (for assignments beginning in Week 4)
+# Building for code coverage (for assignments beginning in Week 4)
 
 ```bash
 # if you don't have gcovr or lcov installed, do:

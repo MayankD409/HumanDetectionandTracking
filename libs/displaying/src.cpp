@@ -11,7 +11,7 @@
  * 
  */
 
-#include "display.hpp"
+#include "displaying.hpp"
 
 /**
  * @brief Default constructor.

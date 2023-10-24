@@ -11,4 +11,9 @@ add_library (myLib2
 target_include_directories(myLib2 PUBLIC
   # list of directories:
   .
+  ${OpenCV_INCLUDE_DIRS}
+  )
+
+  target_link_libraries(myLib2
+  ${OpenCV_LIBS}
   )

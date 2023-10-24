@@ -13,7 +13,9 @@
  */
 
 #include <gtest/gtest.h>
+#include <utility>
 #include "detection.hpp"
+#include "tracking.hpp"
 
 static TrackingClass obj_("abc", "def");
 
@@ -57,12 +59,12 @@ TEST(unit_test_dist_from_car, this_should_pass){
     auto val = obj.detectFaces();
     obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
     auto distCamera = obj_.distFromCamera();
-    auto distCar = obj_.distFromCar(distCamera);
+    auto distCar = obj_.distFromCar(distCamera.front().begin()->second);
 
-    EXPECT_GT(distCar.size(), 0);
+    EXPECT_GT(std::tuple_size<decltype(distCar)>::value, 0);
 }
 
-TEST(unit_test_dist_from_car, this_should_pass){
+TEST(unit_test_find_depth, this_should_pass){
     DetectionClass obj("abc", "def");
     obj.initVideoStream(0);
     auto val = obj.detectFaces();

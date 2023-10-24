@@ -47,9 +47,6 @@ class TrackingClass {
    */
   double findDepth(int id);
 
- private:
-  DetectionClass image;
-
   /**
    * @brief Assigns IDs to objects.
    * @return A map containing object IDs and descriptions.
@@ -77,6 +74,10 @@ class TrackingClass {
    */
   std::tuple<double, double, double> distFromCar(
       const std::tuple<double, double, double>& inputTuple);
+
+private:
+  DetectionClass image;
+  
 };
 
 #endif

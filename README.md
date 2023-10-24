@@ -55,12 +55,44 @@ The process is repeated over time for tracking of obstacle movement.
 Testing of components is performed using GoogleTest, and system testing will be performed every iteration for overall functionality verification.
 
 
+# API Information
+The API contains three libraries,
+<br>
+1 - detection library
+<br>
+The library is used to initialise and access the Video Stream and runs face detection to find human obstacles in the image frame.
 
-## Standard install via command-line
+It consists of two method:-
+<br>
+ - initVideoStream()
+ - detectFaces()
+<br>
+2 - tracking library
+<br>
+The library is used to find the (x, y, z) coordinates of the obstacle with respect to the robot reference frame. The library also tracks the motion of obstacles by assigning a unique ID to each object.
+
+It consists of four methods:-
+<br>
+ - assignIDAndTrack()
+ - distFromCamera()
+ - distFromCar()
+ - findDepth()
+<br>
+3 - displaying library
+<br>
+The library is used to interface with the tracking library and output a video showing the tracking of objstacles.
+
+It consists of one method:-
+<br>
+ - drawObjectLocations()
+ 
+
+## Build via command-line
 ```bash
 # Configure the project and generate a native build system:
   # Must re-run this command whenever any CMakeLists.txt file has been changed.
   cmake -S ./ -B build/
+
 # Compile and build the project:
   # rebuild only files that are modified since the last build
   cmake --build build/
@@ -68,6 +100,13 @@ Testing of components is performed using GoogleTest, and system testing will be 
   cmake --build build/ --clean-first
   # to see verbose output, do:
   cmake --build build/ --verbose
+
+# Alternate method to build the project:
+  # build compile_commands.json from scratch
+  bear -- cmake --build build/ --clean-first
+  # or, update the existing compile_commands.json
+  bear --append -- cmake --build build/
+
 # Run program:
   ./build/app/human-tracker
 # Run tests:
@@ -84,7 +123,15 @@ Testing of components is performed using GoogleTest, and system testing will be 
   rm -rf build/
 ```
 
-ref: https://cmake.org/cmake/help/latest/manual/cmake.1.html
+## Alternate method to make & view Doxygen Documentation
+# Download & Build Doxygen
+```bash
+# Download doxygen
+  sudo apt-get install doxygen
+# To build documentation
+  doxygen dconfig
+```
+
 
 ## Building for code coverage (for assignments beginning in Week 4)
 
@@ -101,7 +148,7 @@ ref: https://cmake.org/cmake/help/latest/manual/cmake.1.html
 This generates a index.html page in the build/test_coverage sub-directory that can be viewed locally in a web browser.
 ```
 
-You can also get code coverage report for the *shell-app* target, instead of unit test. Repeat the previous 2 steps but with the *app_coverage* target:
+You can also get code coverage report for the *human-tracker* target, instead of unit test. Repeat the previous 2 steps but with the *app_coverage* target:
 
 ``` bash
 # Now, do another clean compile, run shell-app, and generate its covereage report
@@ -112,63 +159,10 @@ You can also get code coverage report for the *shell-app* target, instead of uni
 This generates a index.html page in the build/app_coverage sub-directory that can be viewed locally in a web browser.
 ```
 
-## How to use GitHub CI to upload coverage report to Codecov
 
-### First, sign up Codecov with you GitHub account.
-
-  https://about.codecov.io/sign-up/
-
-### Enable the repository you want to upload from
-
-After you sign in, you should see a list of your repositories (you may
-have to refresh and reload the page a few times). Enable the one you
-want to receive coverage data from.
-
-### Create a GitHub CI yaml file
-
-See below for the setup of this repo:
-
-https://github.com/TommyChangUMD/cpp-boilerplate-v2/blob/main/.github/workflows/run-unit-test-and-upload-codecov.yml
-
-### Add your Codecov and GitHub CI badge to README.md
-
-Follow the instruction below to copy the badge (in markdown format)
-and paste it at the top of your README.md file.
-
-For example:
-#### CICD Workflow status
-
-https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge
-
-For example,
-
-To generate the CICD badge for this particular repo, I put the line below in this README.md file:
-``` markdown
-![CICD Workflow status](https://github.com/TommyChangUMD/cpp-boilerplate-v2/actions/workflows/run-unit-test-and-upload-codecov.yml/badge.svg)
-```
-![CICD Workflow status](https://github.com/TommyChangUMD/cpp-boilerplate-v2/actions/workflows/run-unit-test-and-upload-codecov.yml/badge.svg)
-
-
-#### Code Coverage Report
-https://docs.codecov.com/docs/status-badges
-
-For example, to generate the Code Coverage badge for this particular repo,  I put the line below in this README.md file:
-``` markdown
-[![codecov](https://codecov.io/gh/TommyChangUMD/cpp-boilerplate-v2/branch/main/graph/badge.svg)](https://codecov.io/gh/TommyChangUMD/cpp-boilerplate-v2)
-```
-
-[![codecov](https://codecov.io/gh/TommyChangUMD/cpp-boilerplate-v2/branch/main/graph/badge.svg)](https://codecov.io/gh/TommyChangUMD/cpp-boilerplate-v2)
-
-
-
-Note: When you click on the codecov badge, you should see the coverage
-report.  You should also see the source file listing.  If not, you may
-need to login your codecov account first.
-
-
-``` bash
-# build compile_commands.json from scratch
+## compile_commands.json Errors
+In case of error regarding the generation of compile_commands.json file,
+Delete the compile_commands.json file and run the following
+```bash
   bear -- cmake --build build/ --clean-first
-# or, update the existing compile_commands.json
-  bear --append -- cmake --build build/
 ```

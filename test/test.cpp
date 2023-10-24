@@ -15,6 +15,8 @@
 #include <gtest/gtest.h>
 #include "detection.hpp"
 
+static TrackingClass obj_("abc", "def");
+
 TEST(unit_test_initialise_VideoStream, this_should_pass) {
     DetectionClass obj("abc", "def");
     bool val = obj.initVideoStream(0);
@@ -22,10 +24,50 @@ TEST(unit_test_initialise_VideoStream, this_should_pass) {
     EXPECT_TRUE(val); 
 }
 
-TEST(dummy_test, this_should_pass) {
+TEST(unit_test_detect_faces, this_should_pass) {
     DetectionClass obj("abc", "def");
     obj.initVideoStream(0);
     auto val = obj.detectFaces();
     
     EXPECT_GT(val.size(), 0); 
+}
+
+TEST(unit_test_assign_ID, this_should_pass){
+    DetectionClass obj("abc", "def");
+    obj.initVideoStream(0);
+    auto val = obj.detectFaces();
+    auto ids = obj_.assignIDAndTrack(val);
+
+    EXPECT_GT(ids.size(), 0);
+}
+
+TEST(unit_test_dist_from_camera, this_should_pass){
+    DetectionClass obj("abc", "def");
+    obj.initVideoStream(0);
+    auto val = obj.detectFaces();
+    obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
+    auto distCamera = obj_.distFromCamera();
+
+    EXPECT_GT(distCamera.size(), 0);
+}
+
+TEST(unit_test_dist_from_car, this_should_pass){
+    DetectionClass obj("abc", "def");
+    obj.initVideoStream(0);
+    auto val = obj.detectFaces();
+    obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
+    auto distCamera = obj_.distFromCamera();
+    auto distCar = obj_.distFromCar(distCamera);
+
+    EXPECT_GT(distCar.size(), 0);
+}
+
+TEST(unit_test_dist_from_car, this_should_pass){
+    DetectionClass obj("abc", "def");
+    obj.initVideoStream(0);
+    auto val = obj.detectFaces();
+    obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
+    auto depth = obj_.findDepth(1);
+
+    EXPECT_NEAR(depth, 5, 0.001);
 }

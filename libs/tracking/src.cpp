@@ -16,7 +16,7 @@
  * @brief Default constructor.
  */
 TrackingClass::TrackingClass(const std::string& detectModelPath, const std::string& detectConfigPath) 
-: image(const std::string& modelPath, const std::string& configPath) {}
+: image(detectModelPath, detectConfigPath) {}
 
 
 /**
@@ -35,7 +35,9 @@ double TrackingClass::findDepth(int id) { return 0.0; }
  * @return A map of object IDs to object names.
  */
 std::vector<std::map<int, cv::Rect>> TrackingClass::assignIDAndTrack(const std::vector<cv::Rect> &detections) {
-  return std::vector<std::map<int, cv::Rect>>();
+  std::vector<std::map<int, cv::Rect>> assignedID(2);
+  
+  return assignedID;
 }
 
 /**
@@ -44,8 +46,10 @@ std::vector<std::map<int, cv::Rect>> TrackingClass::assignIDAndTrack(const std::
  * @return A tuple containing the object ID, distance in meters, and object
  * name.
  */
-std::vector<int, std::tuple<double, double, double>> TrackingClass::distFromCamera() {
-  return std::vector<int, std::tuple<double, double, double>>();
+std::vector<std::map<int, std::tuple<double, double, double>>> TrackingClass::distFromCamera() {
+  std::vector<std::map<int, std::tuple<double, double, double>>> distances (2);
+
+  return distances;
 }
 
 /**

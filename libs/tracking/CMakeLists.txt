@@ -15,5 +15,6 @@ target_include_directories(myLib3 PUBLIC
   )
 
   target_link_libraries(myLib3
+  myLib1
   ${OpenCV_LIBS}
   )

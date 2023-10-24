@@ -17,8 +17,8 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <string>
+#include "detection.hpp"
 
-class DetectionClass;
 /**
  * @class TrackingClass
  * @brief A class for Tracking Subjects on the Frame.
@@ -66,7 +66,7 @@ class TrackingClass {
    * of the corresponding ID.
    * The function computes the x and y distance and calls findDepth() to get the z distance.
    */
-  std::vector<int, std::tuple<double, double, double>> distFromCamera();
+  std::vector<std::map<int, std::tuple<double, double, double>>> distFromCamera();
 
   /**
    * @brief Calculates the distance of an object from a car.

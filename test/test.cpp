@@ -13,9 +13,15 @@
  */
 
 #include <gtest/gtest.h>
+#include <iostream>
+#include <opencv2/core.hpp>
+#include <opencv2/core/types.hpp>
+#include <tuple>
 #include <utility>
+#include <vector>
 #include "detection.hpp"
 #include "tracking.hpp"
+#include "displaying.hpp"
 
 static TrackingClass obj_("abc", "def");
 
@@ -61,7 +67,7 @@ TEST(unit_test_dist_from_car, this_should_pass){
     auto distCamera = obj_.distFromCamera();
     auto distCar = obj_.distFromCar(distCamera.front().begin()->second);
 
-    EXPECT_GT(std::tuple_size<decltype(distCar)>::value, 0);
+    EXPECT_GT(std::get<0>(distCar)+std::get<1>(distCar)+std::get<2>(distCar), 0);
 }
 
 TEST(unit_test_find_depth, this_should_pass){
@@ -72,4 +78,14 @@ TEST(unit_test_find_depth, this_should_pass){
     auto depth = obj_.findDepth(1);
 
     EXPECT_NEAR(depth, 5, 0.001);
+}
+
+TEST(unit_test_draw_object, this_should_pass){
+    cv::Mat rect = cv::Mat::zeros(1, 1, CV_64F);
+    std::vector<std::tuple<int, cv::Rect>> draw = { {1, cv::Rect(1,1,5,5)} };
+    DisplayClass obj;
+    auto response = obj.drawObjectLocations(rect, draw);
+    auto check = cv::countNonZero(response);
+
+    EXPECT_NE(check, 0);
 }

@@ -35,7 +35,7 @@ double TrackingClass::findDepth(int id) { return 0.0; }
  * @return A map of object IDs to object names.
  */
 std::vector<std::map<int, cv::Rect>> TrackingClass::assignIDAndTrack(const std::vector<cv::Rect> &detections) {
-  std::vector<std::map<int, cv::Rect>> assignedID(2);
+  std::vector<std::map<int, cv::Rect>> assignedID;
   
   return assignedID;
 }
@@ -47,7 +47,7 @@ std::vector<std::map<int, cv::Rect>> TrackingClass::assignIDAndTrack(const std::
  * name.
  */
 std::vector<std::map<int, std::tuple<double, double, double>>> TrackingClass::distFromCamera() {
-  std::vector<std::map<int, std::tuple<double, double, double>>> distances (2);
+  std::vector<std::map<int, std::tuple<double, double, double>>> distances;
 
   return distances;
 }
@@ -65,6 +65,6 @@ std::vector<std::map<int, std::tuple<double, double, double>>> TrackingClass::di
  */
 std::tuple<double, double, double> TrackingClass::distFromCar(
     const std::tuple<double, double, double> &inputTuple) {
-  return std::tuple<double, double, double>();
+  return std::tuple<double, double, double>(0, 0, 0);
 }
 

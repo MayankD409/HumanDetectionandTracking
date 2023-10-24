@@ -138,7 +138,7 @@ It consists of one method:-
 ```
 
 
-# Building for code coverage (for assignments beginning in Week 4)
+# Building for code coverage
 
 ```bash
 # if you don't have gcovr or lcov installed, do:

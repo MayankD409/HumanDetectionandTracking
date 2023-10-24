@@ -32,7 +32,7 @@ class TrackingClass {
   /**
    * @brief Constructor for TrackingClass.
    */
-  TrackingClass(const std::string& modelPath, const std::string& configPath);
+  TrackingClass(const std::string& detectModelPath, const std::string& detectConfigPath);
 
   /**
    * @brief Destructor for TrackingClass.
@@ -42,9 +42,10 @@ class TrackingClass {
   /**
    * @brief Finds the depth of an object.
    * The function will be called by distFromCamera() to get the 
+   * @param id The ID of the bounding box whose depth needs to be found
    * @return Depth value.
    */
-  double findDepth();
+  double findDepth(int id);
 
  private:
   DetectionClass image;

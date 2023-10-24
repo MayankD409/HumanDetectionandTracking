@@ -15,7 +15,9 @@
 /**
  * @brief Default constructor.
  */
-TrackingClass::TrackingClass(const std::string& modelPath, const std::string& configPath) : image(const std::string& modelPath, const std::string& configPath) {}
+TrackingClass::TrackingClass(const std::string& detectModelPath, const std::string& detectConfigPath) 
+: image(const std::string& modelPath, const std::string& configPath) {}
+
 
 /**
  * @brief Default Destructor.
@@ -26,7 +28,7 @@ TrackingClass::~TrackingClass() {}
  * @brief Finds the depth of an object in the scene.
  * @return The depth of the object in meters.
  */
-double TrackingClass::findDepth() { return 0.0; }
+double TrackingClass::findDepth(int id) { return 0.0; }
 
 /**
  * @brief Assigns IDs to objects in the scene.
@@ -42,8 +44,8 @@ std::vector<std::map<int, cv::Rect>> TrackingClass::assignIDAndTrack(const std::
  * @return A tuple containing the object ID, distance in meters, and object
  * name.
  */
-std::tuple<int, double, std::string> TrackingClass::distFromCamera() {
-  return std::tuple<int, double, std::string>();
+std::vector<int, std::tuple<double, double, double>> TrackingClass::distFromCamera() {
+  return std::vector<int, std::tuple<double, double, double>>();
 }
 
 /**
@@ -57,8 +59,8 @@ std::tuple<int, double, std::string> TrackingClass::distFromCamera() {
  * @return A tuple containing the object ID, distance in meters, and object name
  * of the object being calculated.
  */
-std::tuple<int, double, std::string> TrackingClass::distFromCar(
+std::tuple<double, double, double> TrackingClass::distFromCar(
     const std::tuple<double, double, double> &inputTuple) {
-  return std::tuple<int, double, std::string>();
+  return std::tuple<double, double, double>();
 }
 

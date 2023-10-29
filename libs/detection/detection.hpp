@@ -50,14 +50,15 @@ class DetectionClass {
   /**
    * @brief Detect faces in the current frame obtained from the video stream.
    * @return A vector of cv::Rect representing the detected faces' bounding
-   * boxes.
+   * boxes and draw rectangle.
    */
-  std::vector<cv::Rect> detectFaces();
+  std::vector<cv::Rect> detectFaces(cv::Mat& frame); 
 
  private:
   cv::dnn::Net faceDetectionModel;  ///< Deep learning face detection model.
-  cv::VideoCapture videoCapture;  ///< Video capture object for accessing frames
-                                  ///< from the camera.
+  cv::VideoCapture videoCapture;  ///< Video capture object for accessing frames from the camera.
+  std::std::vector<std::string> classLabels;
+  float confidenceThreshold = 0.5;
 };
 
 #endif  // DETECTION_HPP

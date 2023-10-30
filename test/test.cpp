@@ -50,7 +50,9 @@ TEST(unit_test_initialise_VideoStream, this_should_pass) {
 TEST(unit_test_detect_faces, this_should_pass) {
   DetectionClass obj("abc", "def");
   obj.initVideoStream(0);
-  auto val = obj.detectFaces();
+  cv::Mat frame;
+  obj.videoCapture >> frame;
+  auto val = obj.detectFaces(frame);
 
   EXPECT_GT(val.size(), 0);
 }
@@ -62,7 +64,9 @@ TEST(unit_test_detect_faces, this_should_pass) {
 TEST(unit_test_assign_ID, this_should_pass) {
   DetectionClass obj("abc", "def");
   obj.initVideoStream(0);
-  auto val = obj.detectFaces();
+  cv::Mat frame;
+  obj.videoCapture >> frame;
+  auto val = obj.detectFaces(frame);
   auto ids = obj_.assignIDAndTrack(val);
 
   EXPECT_GT(ids.size(), 0);
@@ -75,7 +79,9 @@ TEST(unit_test_assign_ID, this_should_pass) {
 TEST(unit_test_dist_from_camera, this_should_pass) {
   DetectionClass obj("abc", "def");
   obj.initVideoStream(0);
-  auto val = obj.detectFaces();
+  cv::Mat frame;
+  obj.videoCapture >> frame;
+  auto val = obj.detectFaces(frame);
   obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
   auto distCamera = obj_.distFromCamera();
 
@@ -89,7 +95,9 @@ TEST(unit_test_dist_from_camera, this_should_pass) {
 TEST(unit_test_dist_from_car, this_should_pass) {
   DetectionClass obj("abc", "def");
   obj.initVideoStream(0);
-  auto val = obj.detectFaces();
+  cv::Mat frame;
+  obj.videoCapture >> frame;
+  auto val = obj.detectFaces(frame);
   obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
   auto distCamera = obj_.distFromCamera();
   auto distCar = obj_.distFromCar(distCamera.front().begin()->second);
@@ -105,7 +113,9 @@ TEST(unit_test_dist_from_car, this_should_pass) {
 TEST(unit_test_find_depth, this_should_pass) {
   DetectionClass obj("abc", "def");
   obj.initVideoStream(0);
-  auto val = obj.detectFaces();
+  cv::Mat frame;
+  obj.videoCapture >> frame;
+  auto val = obj.detectFaces(frame);
   obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
   auto depth = obj_.findDepth(1);
 

@@ -26,7 +26,12 @@ TrackingClass::~TrackingClass() {}
 
 /**
  * @brief Finds the depth of an object in the scene.
- * @return The depth of the object in meters.
+ * The depth is found analytically by comparing detection height values and 
+ * z distances. A series of linear functions are then built using the 
+ * tested cases to predict the z distance.
+ * 
+ * @param id Variable used to access the obstacles in the obstacleMap
+ * @return double The depth of the object in meters.
  */
 double TrackingClass::findDepth(int id) { 
   double height = obstacleMapVector[id].height;
@@ -49,6 +54,10 @@ double TrackingClass::findDepth(int id) {
 
 /**
  * @brief Assigns IDs to objects in the scene.
+ * 1 - When the obstacleMap is empty the method adds new detections into the Map.
+ * 2 - When the number of detected obstacles and current obstacles are the same, the function will find the minimum Euclidean distance value and reassign the ID to the nearest detection.
+ * 3 - When the number of detected obstacles are greater than the current obstacles, all current obstacles will be mapped and then the remaining detections will be assigned a new ID.
+ * 4 - When the number of detected obstacles are lesser than the current obstacles, all current obstacles will be mapped and only obstacles near the edge of frame will be deleted. If the obstacle is in the center, the algorithm assumes that the detection failed because of low accuracy and when the obstacle reappears the ID will be reassigned, in the mean time the obstacle bounding box will be displayed at the last detected location.
  * 
  * @param detections A vector containing all the detected faces in image frame
  * @return std::map<int, cv::Rect> A map of object IDs to object names.
@@ -114,7 +123,8 @@ std::map<int, cv::Rect> TrackingClass::assignIDAndTrack(
 }
 
 /**
- * @brief 
+ * @brief The method used to compute the (x, y, z) distance of obstacle in Camera Reference Frame.
+ * Finds the centroid values of x and y, and gets z value by calling the findDepth function.
  * 
  * @param frameWidth The pixel width of the image frame
  * @param frameHeight The pixel height of the image frame
@@ -132,6 +142,8 @@ TrackingClass::distFromCamera(int frameWidth, int frameHeight) {
 
 /**
  * @brief Calculates the distance between an object and the car.
+ * Converts the Camera reference distance into Car reference distance, using geometry.
+ * The method takes into account prototype configurations, such that the camera not being placed at the origin of car reference and field of view values of different cameras.
  *
  * @param input A map with containing the object ID, and tuple containing distance in meters
  * 

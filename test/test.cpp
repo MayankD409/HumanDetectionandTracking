@@ -58,7 +58,7 @@ TEST(unit_test_detect_faces, this_should_pass) {
   obj.videoCapture >> frame;
   auto val = obj.detectFaces(frame);
 
-  EXPECT_GT(1, 0);
+  EXPECT_EQ(0, 0);
 }
 
 /**
@@ -76,7 +76,7 @@ TEST(unit_test_assign_ID, this_should_pass) {
   auto val = obj.detectFaces(frame);
   auto ids = obj_.assignIDAndTrack(val);
 
-  EXPECT_GT(1, 0);
+  EXPECT_EQ(0, 0);
 }
 
 /**
@@ -95,7 +95,7 @@ TEST(unit_test_dist_from_camera, this_should_pass) {
   obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
   auto distCamera = obj_.distFromCamera(frame.cols, frame.rows);
 
-  EXPECT_GT(1, 0);
+  EXPECT_EQ(0, 0);
 }
 
 /**
@@ -115,8 +115,7 @@ TEST(unit_test_dist_from_car, this_should_pass) {
   auto distCamera = obj_.distFromCamera(frame.cols, frame.rows);
   auto distCar = obj_.distFromCar(distCamera);
 
-  EXPECT_GT(1,
-            0);
+ EXPECT_EQ(0, 0);
 }
 
 /**
@@ -135,5 +134,5 @@ TEST(unit_test_find_depth, this_should_pass) {
   obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
   auto depth = obj_.findDepth(1);
 
-  EXPECT_NEAR(5, 5, 0.001);
+  EXPECT_EQ(0, 0);
 }

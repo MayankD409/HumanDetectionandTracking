@@ -4,7 +4,7 @@
 This repository consists of deliverables for the Midterm Project for,
  - Lowell Lobo (120095719)
  - Kautilya ()
- - Mayank Deshpande ()
+ - Mayank Deshpande (120387333)
 
 # Project Overview
 

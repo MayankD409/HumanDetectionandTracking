@@ -44,6 +44,14 @@ int main() {
     while (true){
         tracker.image.videoCapture >> frame;
 
+        auto rectangles = tracker.image.detectFaces(frame);
+
+        tracker.obstacleMapVector = tracker.assignIDAndTrack(rectangles);
+
+        auto cameraDistance = tracker.distFromCamera(frame.cols, frame.rows);
+
+        auto carDistance = tracker.distFromCar(cameraDistance);
+
     imshow("Image", frame);
         int esc_key = 27;
         if (cv::waitKey(10) == esc_key) {

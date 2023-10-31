@@ -107,9 +107,7 @@ TEST(unit_test_dist_from_car, this_should_pass) {
                      "../../models/deploy.prototxt");
   TrackingClass obj_("../../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
                      "../../models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
-  obj.initVideoStream(0);
-  cv::Mat frame;
-  obj.videoCapture >> frame;
+  cv::Mat frame = cv::imread("../../assets/faceImage.jpg");
   auto val = obj.detectFaces(frame);
   obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
   auto distCamera = obj_.distFromCamera(frame.cols, frame.rows);
@@ -127,9 +125,7 @@ TEST(unit_test_find_depth, this_should_pass) {
                      "../../models/deploy.prototxt");
   TrackingClass obj_("../../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
                      "../../models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
-  obj.initVideoStream(0);
-  cv::Mat frame;
-  obj.videoCapture >> frame;
+  cv::Mat frame = cv::imread("../../assets/faceImage.jpg");
   auto val = obj.detectFaces(frame);
   obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
   auto depth = obj_.findDepth(1);

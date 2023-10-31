@@ -29,6 +29,16 @@
  */
 class TrackingClass {
  public:
+ /**
+  * @brief Variables x, y and z that hold the values of distance between the
+  * Car reference frame and Camera reference frame
+  */
+  double xOffset, yOffset, zOffset;
+  /**
+   * @brief Variables horizontalFOI, verticalFOI that hold the values for Camera 
+   * Field of View
+   */
+  double horizontalFOI, verticalFOI;
   /**
    * @brief Vector that holds the position of all obstacles found in image
    * frame after assigning unique IDs
@@ -36,10 +46,16 @@ class TrackingClass {
    */
   std::vector<std::map<int, cv::Rect>> obstacleMapVector;
   /**
+   * @brief Object of class DetectionClass (part-of relation), used to access
+   * the video stream and get detection of obstacles.
+   *
+   */
+  DetectionClass image;
+  /**
    * @brief Constructor for TrackingClass.
    */
   TrackingClass(const std::string& detectModelPath,
-                const std::string& detectConfigPath);
+                             const std::string& detectConfigPath);
 
   /**
    * @brief Destructor for TrackingClass.
@@ -56,43 +72,42 @@ class TrackingClass {
 
   /**
    * @brief Assigns IDs to objects.
-   * @return A map containing object IDs and descriptions.
    * The function is called after face detection.
    * The function assigns unique IDs in the first iteration of face detection.
    * In subsequent iterations, the function will compare the the current
    * obstacleMapVector with the new face detection and assign IDs to the new
    * bounding box based on minimum Euclidean Distance
+   * 
+   * @param detections 
+   * @return std::map<int, cv::Rect> A map containing object IDs and descriptions.
    */
-  std::vector<std::map<int, cv::Rect>> assignIDAndTrack(
+  std::map<int, cv::Rect> assignIDAndTrack(
       const std::vector<cv::Rect>& detections);
 
-  /**
-   * @brief Calculates the distance of an object from the camera.
-   * @return A vector containing the ID and a tuple containing x distance, y
-   * distance, and z distance of the corresponding ID. The function computes the
-   * x and y distance and calls findDepth() to get the z distance.
-   */
-  std::vector<std::map<int, std::tuple<double, double, double>>>
-  distFromCamera();
+/**
+ * @brief Calculates the distance of an object from the camera.
+ * The function computes the
+ * x and y distance and calls findDepth() to get the z distance.
+ *
+ * @param frameWidth 
+ * @param frameHeight 
+ * @return std::map<int, std::tuple<double, double, double>> A map containing the ID and a tuple containing x distance, y
+   * distance, and z distance of the corresponding ID. 
+ */
+  std::map<int, std::tuple<double, double, double>>
+  distFromCamera(int frameWidth, int frameHeight);
 
   /**
    * @brief Calculates the distance of an object from a car.
    * The function takes in distance from camera frame and performs a
    * transformation to get the distance from robot frame.
-   * @param inputTuple Input tuple containing object information.
-   * @return A tuple containing x distance, y distance, and z distance from
+   * @param input Input map with tuple containing object information.
+   * @return A map with tuple containing x distance, y distance, and z distance from
    * robot reference frame.
    */
-  std::tuple<double, double, double> distFromCar(
-      const std::tuple<double, double, double>& inputTuple);
+  std::map<int, std::tuple<double, double, double>> distFromCar(
+      const std::map<int, std::tuple<double, double, double>>& input);
 
- private:
-  /**
-   * @brief Object of class DetectionClass (part-of relation), used to access
-   * the video stream and get detection of obstacles.
-   *
-   */
-  DetectionClass image;
 };
 
 #endif

@@ -32,24 +32,27 @@ double TrackingClass::findDepth(int id) { return 0.0; }
 
 /**
  * @brief Assigns IDs to objects in the scene.
- * @return A map of object IDs to object names.
+ * 
+ * @param detections A vector containing all the detected faces in image frame
+ * @return std::map<int, cv::Rect> A map of object IDs to object names.
  */
-std::vector<std::map<int, cv::Rect>> TrackingClass::assignIDAndTrack(
+std::map<int, cv::Rect> TrackingClass::assignIDAndTrack(
     const std::vector<cv::Rect>& detections) {
-  std::vector<std::map<int, cv::Rect>> assignedID;
+  std::map<int, cv::Rect> assignedID;
 
   return assignedID;
 }
 
 /**
- * @brief Calculates the distance between an object and the camera.
- *
- * @return A tuple containing the object ID, distance in meters, and object
- * name.
+ * @brief 
+ * 
+ * @param frameWidth The pixel width of the image frame
+ * @param frameHeight The pixel height of the image frame
+ * @return std::map<int, std::tuple<double, double, double>> A map containing the object ID and tuple containing distance in meters
  */
-std::vector<std::map<int, std::tuple<double, double, double>>>
-TrackingClass::distFromCamera() {
-  std::vector<std::map<int, std::tuple<double, double, double>>> distances;
+std::map<int, std::tuple<double, double, double>>
+TrackingClass::distFromCamera(int frameWidth, int frameHeight) {
+  std::map<int, std::tuple<double, double, double>> distances;
 
   return distances;
 }
@@ -57,15 +60,15 @@ TrackingClass::distFromCamera() {
 /**
  * @brief Calculates the distance between an object and the car.
  *
- * @param inputTuple A tuple containing the object ID, distance in meters, and
- * object name of the other object.
- * @param intOffset An offset to add to the object ID.
- * @param doubleOffset An offset to add to the distance in meters.
+ * @param input A map with containing the object ID, and tuple containing distance in meters
+ * 
  *
- * @return A tuple containing the object ID, distance in meters, and object name
- * of the object being calculated.
+ * @return A map with containing the object ID, and tuple containing distance in meters
+ * 
  */
-std::tuple<double, double, double> TrackingClass::distFromCar(
-    const std::tuple<double, double, double>& inputTuple) {
-  return std::tuple<double, double, double>(0, 0, 0);
+std::map<int, std::tuple<double, double, double>> TrackingClass::distFromCar(
+    const std::map<int, std::tuple<double, double, double>>& input) {
+  std::map<int, std::tuple<double, double, double>> distances;
+
+  return distances;
 }

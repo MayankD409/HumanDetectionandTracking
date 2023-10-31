@@ -123,8 +123,11 @@ std::map<int, cv::Rect> TrackingClass::assignIDAndTrack(
 std::map<int, std::tuple<double, double, double>>
 TrackingClass::distFromCamera(int frameWidth, int frameHeight) {
   std::map<int, std::tuple<double, double, double>> distances;
-
-  return distances;
+    for (const auto & r : obstacleMapVector){
+        double z = findDepth(r.first);
+        distances[r.first] = std::make_tuple(r.second.x - frameWidth/2 + r.second.width/2, r.second.y - frameHeight/2 + r.second.height/2, z);
+    }
+    return distances;
 }
 
 /**

@@ -41,9 +41,9 @@ TEST(unit_test_initialise_VideoStream, this_should_pass) {
   DetectionClass obj(
       "../../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
       "../../models/deploy.prototxt");
-  bool val = obj.initVideoStream(0);
+  bool val = obj.initVideoStream(-1);
 
-  EXPECT_TRUE(true);
+  EXPECT_FALSE(val);
 }
 
 /**

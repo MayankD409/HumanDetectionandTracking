@@ -37,10 +37,63 @@ double TrackingClass::findDepth(int id) { return 0.0; }
  * @return std::map<int, cv::Rect> A map of object IDs to object names.
  */
 std::map<int, cv::Rect> TrackingClass::assignIDAndTrack(
-    const std::vector<cv::Rect>& detections) {
-  std::map<int, cv::Rect> assignedID;
+    std::vector<cv::Rect>& detections) {
+   int len = detections.size();
+    int lenObjMap = obstacleMapVector.size();
+    
+    if (detections.size() > 0){
+        for (const auto & r : obstacleMapVector){
+            double distances[detections.size()];
+            std::map<double, cv::Rect> distMap;
+            if (detections.size() > 0){
+                for (int i = 0; i<detections.size(); i++){
+                    distances[i] = pow((detections[i].x - r.second.x), 2) + pow((detections[i].x - r.second.x), 2);
+                    distMap[distances[i]] = detections[i];
+                }
+            }
+            else{
+                distances[0] = -100;
+            }
+            
+            int n = (sizeof(distances)/sizeof(distances[0]));
+            int minVal = *std::min_element(distances, distances + n);
 
-  return assignedID;
+            if ((len < lenObjMap)){
+                if (((r.second.x < 10) || (r.second.y < 10) || (r.second.x + r.second.width > 640 - 10) || (r.second.y + r.second.height > 480 - 10)) &&  (minVal < 0)){
+                    obstacleMapVector.erase(r.first);
+                }
+                else if (((r.second.x < 10) || (r.second.y < 10) || (r.second.x + r.second.width > 640 - 10) || (r.second.y + r.second.height > 480 - 10)) &&  (minVal > 4500)){
+                    obstacleMapVector.erase(r.first);
+                }
+                else if ((minVal < 0) || (minVal > 4500)){
+                        continue;
+                    }
+                else{
+                    obstacleMapVector[r.first] = distMap[minVal];
+                    detections.erase(std::find(detections.begin(), detections.end(), distMap[minVal]));
+                }
+            }
+            else{
+                obstacleMapVector[r.first] = distMap[minVal];
+                detections.erase(std::find(detections.begin(), detections.end(), distMap[minVal]));
+            }
+        }
+
+        if (len > lenObjMap){
+            for (int i = 0; i < len - obstacleMapVector.size(); i++){
+                obstacleMapVector[obstacleMapVector.size()+i+1] = detections[i];
+            }
+        }
+
+        if (obstacleMapVector.size() > 0){
+            return obstacleMapVector;
+        }
+        
+        return std::map<int, cv::Rect>();
+    }   
+    else{
+        return std::map<int, cv::Rect> ();
+    }
 }
 
 /**

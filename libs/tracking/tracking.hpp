@@ -86,7 +86,7 @@ class TrackingClass {
    * @return std::map<int, cv::Rect> A map containing object IDs and descriptions.
    */
   std::map<int, cv::Rect> assignIDAndTrack(
-      const std::vector<cv::Rect>& detections);
+      std::vector<cv::Rect>& detections);
 
 /**
  * @brief Calculates the distance of an object from the camera.

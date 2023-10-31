@@ -37,7 +37,7 @@ DetectionClass::~DetectionClass() { videoCapture.release(); }
 bool DetectionClass::initVideoStream(int deviceID) {
   // Initialize the video stream from the specified device (camera)
   // Return true if successfully opened, false otherwise
-  if (deviceID < 0){
+  if (deviceID < 0) {
     return false;
   }
   videoCapture.open(deviceID);

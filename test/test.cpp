@@ -100,7 +100,7 @@ TEST(unit_test_dist_from_camera, this_should_pass) {
   obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
   auto distCamera = obj_.distFromCamera(frame.cols, frame.rows);
 
-  EXPECT_GT(sqrt(pow(get<0>(distCamera.at(1)), 2)+pow(get<1>(distCamera.at(1)), 2)+pow(get<2>(distCamera.at(1)), 2)), 2);
+  EXPECT_GT(sqrt(pow(std::get<0>(distCamera.at(1)), 2)+pow(std::get<1>(distCamera.at(1)), 2)+pow(std::get<2>(distCamera.at(1)), 2)), 2);
 }
 
 /**
@@ -120,7 +120,7 @@ TEST(unit_test_dist_from_car, this_should_pass) {
   auto distCamera = obj_.distFromCamera(frame.cols, frame.rows);
   auto distCar = obj_.distFromCar(distCamera);
 
-  EXPECT_GT(sqrt(pow(get<0>(distCar.at(1)), 2)+pow(get<1>(distCar.at(1)), 2)+pow(get<2>(distCar.at(1)), 2)), 2);
+  EXPECT_GT(sqrt(pow(std::get<0>(distCar.at(1)), 2)+pow(std::get<1>(distCar.at(1)), 2)+pow(std::get<2>(distCar.at(1)), 2)), 2);
 }
 
 /**

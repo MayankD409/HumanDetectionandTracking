@@ -129,7 +129,8 @@ It consists of four methods:-
     If the number of detections are equal to the number of IDs assigned, the algorithm computes and assigns IDs based on minimum Euclidean distance between detection. This consists the tracking feature.
     If the number of detections are greater than the number of assigned IDs, then the algorithm reassigns the correct IDs to the corresponding detection and assigns new IDs to the new detections.
     If the number of detections are lesser than the number of assigned IDs, 
-    if the detection is near the edge and the minimum Euclidean distance is greater than a specific value then the ID is deallocated. But if the detection is lost in the center of the frame, false detection is assumed, and the detection with ID is retained. If all conditions above are not met, the ID is reassignd.
+    if the detection is near the edge and the minimum Euclidean distance is greater than a specific value then the ID is deallocated. But if the detection is lost in the center of the frame, false detection is assumed, and the detection with ID is retained. If all conditions above are not met, the ID is reassigned.
+<br>
 <br>
   -- distFromCamera()
 <br>

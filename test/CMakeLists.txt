@@ -18,7 +18,6 @@ target_link_libraries(cpp-test PUBLIC
   # list of libraries:
   gtest
   myLib1
-  myLib2
   myLib3
   )
 

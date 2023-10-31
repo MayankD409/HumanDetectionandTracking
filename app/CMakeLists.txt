@@ -16,7 +16,6 @@ target_include_directories(human-tracker PUBLIC
 target_link_libraries(human-tracker PUBLIC
   # list of libraries
   myLib1
-  myLib2
   myLib3
   )
 

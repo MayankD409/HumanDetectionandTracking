@@ -1,7 +1,12 @@
 ![CICD Workflow status](https://github.com/MayankD409/Human_Tracking_CPP/actions/workflows/run-unit-test-and-upload-codecov.yml/badge.svg) [![codecov](https://codecov.io/gh/MayankD409/Human_Tracking_CPP/graph/badge.svg?token=WUFHUBTG05)](https://codecov.io/gh/MayankD409/Human_Tracking_CPP) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 
-# Overview
+This repository consists of deliverables for the Midterm Project for,
+ - Lowell Lobo (120095719)
+ - Kautilya ()
+ - Mayank Deshpande ()
+
+# Project Overview
 
 Perception is essential for object detection, environmental awareness, path planning and control; through perception, a system can truly be considered autonomous. Acme requires the development of a perception component in its autonomous car system, and a human obstacle detection and tracking module needs to be built.
 The aim is to build a perception module to detect human objects and track their location directly into the robot reference frame.
@@ -44,11 +49,6 @@ Mayank Deshpande:-
 <br>
 Graduate Student in Enginnering - Robotics at University of Maryland, College Park
 
-# Links
-[AIP Google Sheet](https://docs.google.com/spreadsheets/d/17q5Q-qL-ZU2LQK8llQSjsIJ8_037MAFyNenNofpY_PI/edit#gid=0)
-
-[Sprint Notes](https://docs.google.com/document/d/1UX6oGidNdux2FeOGgIjD-ivvmi8oCiHlf1OJARla3Ro/edit)
-
 
 # Process
 
@@ -60,6 +60,29 @@ The process is repeated over time for tracking of obstacle movement.
 Testing of components is performed using GoogleTest, and system testing will be performed every iteration for overall functionality verification.
 
 
+# AIP Methodology
+
+The project was implemented using Agile Iterative Process (AIP) along with pair programming and a test-driven development approach. Product backlog, iteration backlogs for each phase and work log have been created.
+Each iteration started with a meeting to discuss the agenda and ends with a sprint review.
+
+
+# Links
+[AIP Google Sheet](https://docs.google.com/spreadsheets/d/17q5Q-qL-ZU2LQK8llQSjsIJ8_037MAFyNenNofpY_PI/edit#gid=0)
+
+[Sprint Notes](https://docs.google.com/document/d/1UX6oGidNdux2FeOGgIjD-ivvmi8oCiHlf1OJARla3Ro/edit)
+
+
+# Dependencies
+The project uses the OpenCV library to read video frame, perform image processing and run inference.
+<br>
+Together with OpenCV, a pretrained ResNet Caffemodel is used in the implementation.
+
+# Installing Dependencies
+OpenCV can be installed as follows,
+```bash
+  sudo apt install libopencv-dev
+```
+
 # API Information
 The API contains three libraries,
 <br>
@@ -67,10 +90,22 @@ The API contains three libraries,
 <br>
 The library is used to initialise and access the Video Stream and runs face detection to find human obstacles in the image frame.
 
-It consists of two method:-
+It consists of two method and a constructor:-
 <br>
  - initVideoStream()
  - detectFaces()
+<br>
+<br>
+  -- Constructor
+ <br>
+    The constructor initialises the detection model in OpenCV using the readNet() method
+<br> 
+  -- initVideoStream()
+<br>
+    The VideoStream is initialised to constantly read image frames from the camera setup.
+<br>
+  -- detectFaces()
+    Uses the model that was initialised to detect faces in the image frame and return bounding boxes above a confidence level in the format cv::Rect
 <br>
 2 - tracking library
 <br>
@@ -83,15 +118,30 @@ It consists of four methods:-
  - distFromCar()
  - findDepth()
 <br>
-3 - displaying library
+<br> 
+  -- assignIDAndTrack()
 <br>
-The library is used to interface with the tracking library and output a video showing the tracking of objstacles.
-
-It consists of one method:-
+    This method receives the bounding boxes and returns the bounding boxes with a unique ID assigned to them.
+    If there are no IDs assigned, the algorithm assigns IDs to each detection.
+    If the number of detections are equal to the number of IDs assigned, the algorithm computes and assigns IDs based on minimum Euclidean distance between detection. This consists the tracking feature.
+    If the number of detections are greater than the number of assigned IDs, then the algorithm reassigns the correct IDs to the corresponding detection and assigns new IDs to the new detections.
+    If the number of detections are lesser than the number of assigned IDs, 
+    if the detection is near the edge and the minimum Euclidean distance is greater than a specific value then the ID is deallocated. But if the detection is lost in the center of the frame, false detection is assumed, and the detection with ID is retained. If all conditions above are not met, the ID is reassignd.
+<br> 
+  -- distFromCamera()
 <br>
- - drawObjectLocations()
+    This method takes in the the IDs mapped to the bounding boxes and returns the (x, y, z) pixel distance of the obstacle from the camera reference frame using geometry.
+<br> 
+  -- distFromCar()
+<br>
+    This method takes in (x, y, z) pixel distance of the obstacle from the camera reference frame and returns the (x, y, z) distance of the obstacle from the car reference frame in inches. Rotation, Translation and geometry are used to find the distance in inches.
+<br> 
+  -- findDepth()
+<br>
+    This method takes in the ID and returns the z distance in inches.
+    The z distance is found analytically by using sampling and linearising the conversion function.
  
-
+# Running the Application
 ## Build via command-line
 ```bash
 # Configure the project and generate a native build system:
@@ -112,31 +162,42 @@ It consists of one method:-
   # or, update the existing compile_commands.json
   bear --append -- cmake --build build/
 
-# Run program:
+# Run program for testing the actual application:
   ./build/app/human-tracker
-# Run tests:
-  cd build/; ctest; cd -
-  # or if you have newer cmake
-  ctest --test-dir build/
-# Build docs:
-  cmake --build build/ --target docs
-  # open a web browser to browse the doc
-  open docs/html/index.html
+
 # Clean
   cmake --build build/ --target clean
 # Clean and start over:
   rm -rf build/
 ```
 
-## Alternate method to make & view Doxygen Documentation
-### Download & Build Doxygen
+## Running Unit Tests
+```bash
+# Run tests:
+  cd build/; ctest; cd -
+  # or if you have newer cmake
+  ctest --test-dir build/
+```
+
+## Generate Documentation
+### Method 1
 ```bash
 # Download doxygen
   sudo apt-get install doxygen
-# To build documentation
+# Build documentation
   doxygen dconfig
 ```
+### Method 2
+```bash
+# Build docs:
+  cmake --build build/ --target docs
+```
 
+### View Documentation
+```bash
+# open a web browser to browse the doc
+  open docs/html/index.html
+```
 
 # Building for code coverage
 

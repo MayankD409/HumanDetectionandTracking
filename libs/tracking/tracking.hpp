@@ -44,6 +44,11 @@ class TrackingClass {
    */
   double horizontalFOI, verticalFOI;
   /**
+   * @brief Variable used to assign IDs to obstacles without overlap
+   * 
+   */
+  int count;
+  /**
    * @brief Vector that holds the position of all obstacles found in image
    * frame after assigning unique IDs
    *

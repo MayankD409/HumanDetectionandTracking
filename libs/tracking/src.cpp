@@ -17,7 +17,7 @@
  */
 TrackingClass::TrackingClass(const std::string& detectModelPath,
                              const std::string& detectConfigPath)
-    : image(detectModelPath, detectConfigPath) {}
+    : image(detectModelPath, detectConfigPath), count(0) {}
 
 /**
  * @brief Default Destructor.
@@ -94,7 +94,7 @@ std::map<int, cv::Rect> TrackingClass::assignIDAndTrack(
                 else if ((minVal < 0) || (minVal > 4500)){
                         continue;
                     }
-                else{
+                else if (detections.size() > 0){
                     obstacleMapVector[r.first] = distMap[minVal];
                     detections.erase(std::find(detections.begin(), detections.end(), distMap[minVal]));
                 }
@@ -107,7 +107,7 @@ std::map<int, cv::Rect> TrackingClass::assignIDAndTrack(
 
         if (len > lenObjMap){
             for (int i = 0; i < len - obstacleMapVector.size(); i++){
-                obstacleMapVector[obstacleMapVector.size()+i+1] = detections[i];
+                obstacleMapVector[++count] = detections[i];
             }
         }
 
@@ -115,6 +115,7 @@ std::map<int, cv::Rect> TrackingClass::assignIDAndTrack(
             return obstacleMapVector;
         }
         
+
         return std::map<int, cv::Rect>();
     }   
     else{

@@ -86,6 +86,7 @@ OpenCV can be installed as follows,
 # API Information
 The API contains three libraries,
 <br>
+
 ### 1 - detection library
 <br>
 The library is used to initialise and access the Video Stream and runs face detection to find human obstacles in the image frame.
@@ -109,6 +110,7 @@ It consists of two method and a constructor:-
     Uses the model that was initialised to detect faces in the image frame and return bounding boxes above a confidence level in the format cv::Rect
 <br>
 <br>
+
 ### 2 - tracking library
 <br>
 The library is used to find the (x, y, z) coordinates of the obstacle with respect to the robot reference frame. The library also tracks the motion of obstacles by assigning a unique ID to each object.

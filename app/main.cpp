@@ -52,6 +52,17 @@ int main() {
 
         auto carDistance = tracker.distFromCar(cameraDistance);
 
+        cv::Scalar color(0, 105, 205);
+
+        for(const auto & r : tracker.obstacleMapVector){
+            std::cout << r.second.y << ":" << r.second.height << std::endl;
+            cv::rectangle(frame, r.second, color, 4);
+            cv::putText(frame, std::to_string(r.first) + ": (" + std::to_string((int)std::get<0>(carDistance[r.first])) + ", "+ std::to_string((int)std::get<1>(carDistance[r.first])) + ", "+ std::to_string((int)std::get<2>(carDistance[r.first])) + ")", cv::Point(r.second.x, r.second.y - 5),
+             cv::FONT_HERSHEY_COMPLEX,
+             1.0, CV_RGB(255, 0, 0), 2);
+        }
+        
+
     imshow("Image", frame);
         int esc_key = 27;
         if (cv::waitKey(10) == esc_key) {

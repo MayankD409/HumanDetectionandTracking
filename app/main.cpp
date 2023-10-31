@@ -3,15 +3,17 @@
  * @author Lowell Lobo
  * @author Mayank Deshpande
  * @author Kautilya Chappidi
- * @brief The main application of the project, will be used to test the implementation in the future.
+ * @brief The main application of the project, will be used to test the
+ * implementation in the future.
  * @version 0.1
  * @date 2023-10-24
- * 
+ *
  * @copyright Copyright (c) 2023
- * 
+ *
  */
 #include <iostream>
 #include <opencv2/imgcodecs.hpp>
+
 #include "tracking.hpp"
 
 /**
@@ -101,12 +103,11 @@ int main() {
      * 
      */
     imshow("Image", frame);
-        int esc_key = 27;
-        if (cv::waitKey(10) == esc_key) {
-            break;
-        }
+    int esc_key = 27;
+    if (cv::waitKey(10) == esc_key) {
+      break;
     }
+  }
 
-    cv::destroyAllWindows();
-
+  cv::destroyAllWindows();
 }

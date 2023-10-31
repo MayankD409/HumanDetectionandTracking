@@ -13,9 +13,10 @@
 #ifndef TRACKING_HPP
 #define TRACKING_HPP
 
-#include <map>
 #include <bits/stdc++.h>
+
 #include <algorithm>
+#include <map>
 #include <numeric>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
@@ -33,19 +34,19 @@
  */
 class TrackingClass {
  public:
- /**
-  * @brief Variables x, y and z that hold the values of distance between the
-  * Car reference frame and Camera reference frame
-  */
+  /**
+   * @brief Variables x, y and z that hold the values of distance between the
+   * Car reference frame and Camera reference frame
+   */
   double xOffset, yOffset, zOffset;
   /**
-   * @brief Variables horizontalFOI, verticalFOI that hold the values for Camera 
+   * @brief Variables horizontalFOI, verticalFOI that hold the values for Camera
    * Field of View
    */
   double horizontalFOI, verticalFOI;
   /**
    * @brief Variable used to assign IDs to obstacles without overlap
-   * 
+   *
    */
   int count;
   /**
@@ -64,9 +65,8 @@ class TrackingClass {
    * @brief Constructor for TrackingClass.
    */
   TrackingClass(const std::string& detectModelPath,
-                             const std::string& detectConfigPath,
-                              double x, double y,
-                               double z, double th, double tv);
+                const std::string& detectConfigPath, double x, double y,
+                double z, double th, double tv);
 
   /**
    * @brief Destructor for TrackingClass.
@@ -88,37 +88,37 @@ class TrackingClass {
    * In subsequent iterations, the function will compare the the current
    * obstacleMapVector with the new face detection and assign IDs to the new
    * bounding box based on minimum Euclidean Distance
-   * 
-   * @param detections 
-   * @return std::map<int, cv::Rect> A map containing object IDs and descriptions.
+   *
+   * @param detections
+   * @return std::map<int, cv::Rect> A map containing object IDs and
+   * descriptions.
    */
-  std::map<int, cv::Rect> assignIDAndTrack(
-      std::vector<cv::Rect>& detections);
+  std::map<int, cv::Rect> assignIDAndTrack(std::vector<cv::Rect>& detections);
 
-/**
- * @brief Calculates the distance of an object from the camera.
- * The function computes the
- * x and y distance and calls findDepth() to get the z distance.
- *
- * @param frameWidth 
- * @param frameHeight 
- * @return std::map<int, std::tuple<double, double, double>> A map containing the ID and a tuple containing x distance, y
-   * distance, and z distance of the corresponding ID. 
- */
-  std::map<int, std::tuple<double, double, double>>
-  distFromCamera(int frameWidth, int frameHeight);
+  /**
+   * @brief Calculates the distance of an object from the camera.
+   * The function computes the
+   * x and y distance and calls findDepth() to get the z distance.
+   *
+   * @param frameWidth
+   * @param frameHeight
+   * @return std::map<int, std::tuple<double, double, double>> A map containing
+   * the ID and a tuple containing x distance, y distance, and z distance of the
+   * corresponding ID.
+   */
+  std::map<int, std::tuple<double, double, double>> distFromCamera(
+      int frameWidth, int frameHeight);
 
   /**
    * @brief Calculates the distance of an object from a car.
    * The function takes in distance from camera frame and performs a
    * transformation to get the distance from robot frame.
    * @param input Input map with tuple containing object information.
-   * @return A map with tuple containing x distance, y distance, and z distance from
-   * robot reference frame.
+   * @return A map with tuple containing x distance, y distance, and z distance
+   * from robot reference frame.
    */
   std::map<int, std::tuple<double, double, double>> distFromCar(
       std::map<int, std::tuple<double, double, double>>& input);
-
 };
 
 #endif

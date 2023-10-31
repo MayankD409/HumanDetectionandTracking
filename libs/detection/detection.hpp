@@ -52,8 +52,9 @@ class DetectionClass {
    * @return A vector of cv::Rect representing the detected faces' bounding
    * boxes and draw rectangle.
    */
-  std::vector<cv::Rect> detectFaces(cv::Mat& frame); 
-  cv::VideoCapture videoCapture;  ///< Video capture object for accessing frames from the camera.
+  std::vector<cv::Rect> detectFaces(cv::Mat& frame);
+  cv::VideoCapture videoCapture;  ///< Video capture object for accessing frames
+                                  ///< from the camera.
 
  private:
   cv::dnn::Net faceDetectionModel;  ///< Deep learning face detection model.

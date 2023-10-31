@@ -28,7 +28,24 @@ TrackingClass::~TrackingClass() {}
  * @brief Finds the depth of an object in the scene.
  * @return The depth of the object in meters.
  */
-double TrackingClass::findDepth(int id) { return 0.0; }
+double TrackingClass::findDepth(int id) { 
+  double height = obstacleMapVector[id].height;
+    if (height < 108){
+        return ((-73)*(height - 108)/(56)) + 46;
+    }
+    else if((height >= 108) && (height < 251)){
+        return ((-25)*(height - 251)/(143)) + 21;
+    }
+    else if((height >= 251) && (height < 405)){
+        return ((-12)*(height - 405)/(154)) + 9;
+    }
+    else if((height >= 405) && (height < 445)){
+        return ((-9)*(height - 405)/(35)) + 9;
+    }
+    else{
+        return 0.0;
+    }
+}
 
 /**
  * @brief Assigns IDs to objects in the scene.

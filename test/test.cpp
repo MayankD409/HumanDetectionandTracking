@@ -29,14 +29,14 @@
  * @brief static TrackingClass object to be used in the unit test
  * 
  */
-// static TrackingClass obj_("../models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "../models/deploy.prototxt");
+// static TrackingClass obj_("models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
 
 /**
  * @brief Construct a new TEST object.
  * unit test for checking the initVideoStream method of class DetectionClass
  */
 TEST(unit_test_initialise_VideoStream, this_should_pass) {
-  DetectionClass obj("../models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "../models/deploy.prototxt");
+  DetectionClass obj("models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "models/deploy.prototxt");
   bool val = obj.initVideoStream(0);
 
   EXPECT_TRUE(val);
@@ -47,7 +47,7 @@ TEST(unit_test_initialise_VideoStream, this_should_pass) {
  * unit test for checking the detectFaces method of class DetectionClass
  */
 TEST(unit_test_detect_faces, this_should_pass) {
-  DetectionClass obj("../models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "../models/deploy.prototxt");
+  DetectionClass obj("models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "models/deploy.prototxt");
   obj.initVideoStream(0);
   cv::Mat frame;
   obj.videoCapture >> frame;
@@ -61,8 +61,8 @@ TEST(unit_test_detect_faces, this_should_pass) {
  * unit test for checking the assignIDAndTrack method of class TrackingClass
  */
 TEST(unit_test_assign_ID, this_should_pass) {
-  DetectionClass obj("../models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "../models/deploy.prototxt");
-  TrackingClass obj_("../models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "../models/deploy.prototxt");
+  DetectionClass obj("models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "models/deploy.prototxt");
+  TrackingClass obj_("models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
   obj.initVideoStream(0);
   cv::Mat frame;
   obj.videoCapture >> frame;
@@ -77,8 +77,8 @@ TEST(unit_test_assign_ID, this_should_pass) {
  * unit test for checking the distFromCamera method of class TrackingClass
  */
 TEST(unit_test_dist_from_camera, this_should_pass) {
-  DetectionClass obj("../models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "../models/deploy.prototxt");
-  TrackingClass obj_("../models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "../models/deploy.prototxt");
+  DetectionClass obj("models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "models/deploy.prototxt");
+  TrackingClass obj_("models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
   obj.initVideoStream(0);
   cv::Mat frame;
   obj.videoCapture >> frame;
@@ -94,8 +94,8 @@ TEST(unit_test_dist_from_camera, this_should_pass) {
  * unit test for checking the distFromCar method of class TrackingClass
  */
 TEST(unit_test_dist_from_car, this_should_pass) {
-  DetectionClass obj("../models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "../models/deploy.prototxt");
-  TrackingClass obj_("../models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "../models/deploy.prototxt");
+  DetectionClass obj("models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "models/deploy.prototxt");
+  TrackingClass obj_("models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
   obj.initVideoStream(0);
   cv::Mat frame;
   obj.videoCapture >> frame;
@@ -113,8 +113,8 @@ TEST(unit_test_dist_from_car, this_should_pass) {
  * unit test for checking the findDepth method of class TrackingClass
  */
 TEST(unit_test_find_depth, this_should_pass) {
-  DetectionClass obj("../models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "../models/deploy.prototxt");
-  TrackingClass obj_("../models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "../models/deploy.prototxt");
+  DetectionClass obj("models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "models/deploy.prototxt");
+  TrackingClass obj_("models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
   obj.initVideoStream(0);
   cv::Mat frame;
   obj.videoCapture >> frame;

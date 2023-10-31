@@ -11,10 +11,46 @@
  * 
  */
 #include <iostream>
+#include <opencv2/imgcodecs.hpp>
+#include "tracking.hpp"
 
 /**
  * @brief The main method of the file
  * 
  * @return int 
  */
-int main() { return 0; }
+int main() { 
+    double x, y, z, th, tv;
+    // std::cout << "Enter x offset distance in inches: ";
+    // std::cin >> x;
+    // std::cout << std::endl << "Enter y offset distance in inches: ";
+    // std::cin >> y;
+    // std::cout << std::endl << "Enter z offset distance in inches: ";
+    // std::cin >> z;
+    // std::cout << std::endl << "Enter horizontal field of view angle in radians: ";
+    // std::cin >> th;
+    // std::cout << std::endl << "Enter vertical field of view angle in radians: ";
+    // std::cin >> tv;
+    // TrackingClass tracker( "../models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "../models/deploy.prototxt.txt", x, y, z, th, tv);
+    TrackingClass tracker( "models/res10_300x300_ssd_iter_140000_fp16.caffemodel", "models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
+
+    if (!tracker.image.initVideoStream(0)) {
+        return 0;
+    }
+
+    // cv::Mat frame = cv::imread("assets/faceImage.jpg");
+    cv::Mat frame;
+
+    while (true){
+        tracker.image.videoCapture >> frame;
+
+    imshow("Image", frame);
+        int esc_key = 27;
+        if (cv::waitKey(10) == esc_key) {
+            break;
+        }
+    }
+
+    cv::destroyAllWindows();
+
+}

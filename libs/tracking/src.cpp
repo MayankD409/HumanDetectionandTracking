@@ -16,8 +16,8 @@
  * @brief Default constructor.
  */
 TrackingClass::TrackingClass(const std::string& detectModelPath,
-                             const std::string& detectConfigPath)
-    : image(detectModelPath, detectConfigPath), count(0) {}
+                             const std::string& detectConfigPath, double x, double y, double z, double th, double tv)
+    :  xOffset(x), yOffset(y), zOffset(z), horizontalFOI(th), verticalFOI(tv), count(0) ,image(detectModelPath, detectConfigPath) {}
 
 /**
  * @brief Default Destructor.

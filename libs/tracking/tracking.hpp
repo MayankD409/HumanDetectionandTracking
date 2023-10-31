@@ -64,7 +64,9 @@ class TrackingClass {
    * @brief Constructor for TrackingClass.
    */
   TrackingClass(const std::string& detectModelPath,
-                             const std::string& detectConfigPath);
+                             const std::string& detectConfigPath,
+                              double x, double y,
+                               double z, double th, double tv);
 
   /**
    * @brief Destructor for TrackingClass.

@@ -115,10 +115,10 @@ std::map<int, cv::Rect> TrackingClass::assignIDAndTrack(
             return obstacleMapVector;
         }
         
-
         return std::map<int, cv::Rect>();
     }   
     else{
+        count = 0;
         return std::map<int, cv::Rect> ();
     }
 }

@@ -86,7 +86,7 @@ OpenCV can be installed as follows,
 # API Information
 The API contains three libraries,
 <br>
-1 - detection library
+### 1 - detection library
 <br>
 The library is used to initialise and access the Video Stream and runs face detection to find human obstacles in the image frame.
 
@@ -99,15 +99,18 @@ It consists of two method and a constructor:-
   -- Constructor
  <br>
     The constructor initialises the detection model in OpenCV using the readNet() method
-<br> 
+<br>
+<br>
   -- initVideoStream()
 <br>
     The VideoStream is initialised to constantly read image frames from the camera setup.
 <br>
+<br>
   -- detectFaces()
     Uses the model that was initialised to detect faces in the image frame and return bounding boxes above a confidence level in the format cv::Rect
 <br>
-2 - tracking library
+<br>
+### 2 - tracking library
 <br>
 The library is used to find the (x, y, z) coordinates of the obstacle with respect to the robot reference frame. The library also tracks the motion of obstacles by assigning a unique ID to each object.
 
@@ -127,15 +130,18 @@ It consists of four methods:-
     If the number of detections are greater than the number of assigned IDs, then the algorithm reassigns the correct IDs to the corresponding detection and assigns new IDs to the new detections.
     If the number of detections are lesser than the number of assigned IDs, 
     if the detection is near the edge and the minimum Euclidean distance is greater than a specific value then the ID is deallocated. But if the detection is lost in the center of the frame, false detection is assumed, and the detection with ID is retained. If all conditions above are not met, the ID is reassignd.
-<br> 
+<br>
+<br>
   -- distFromCamera()
 <br>
     This method takes in the the IDs mapped to the bounding boxes and returns the (x, y, z) pixel distance of the obstacle from the camera reference frame using geometry.
-<br> 
+<br>
+<br>
   -- distFromCar()
 <br>
     This method takes in (x, y, z) pixel distance of the obstacle from the camera reference frame and returns the (x, y, z) distance of the obstacle from the car reference frame in inches. Rotation, Translation and geometry are used to find the distance in inches.
-<br> 
+<br>
+<br>
   -- findDepth()
 <br>
     This method takes in the ID and returns the z distance in inches.

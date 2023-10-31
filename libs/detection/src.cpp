@@ -58,11 +58,9 @@ std::vector<cv::Rect> DetectionClass::detectFaces(cv::Mat& frame) {
                                         cv::Scalar(104, 117, 123));
   faceDetectionModel.setInput(blob);
   cv::Mat detections = faceDetectionModel.forward();
-  // std::cerr << detections.size() << std::endl;
 
   cv::Mat detection_matrix(detections.size[2], detections.size[3], CV_32F,
                            detections.ptr<float>());
-  std::cerr << detection_matrix.size() << std::endl;
 
   for (int i = 0; i < detection_matrix.rows; i++) {
     float confidence = detection_matrix.at<float>(i, 2);

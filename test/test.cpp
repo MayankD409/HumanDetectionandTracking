@@ -16,11 +16,9 @@
 
 #include <cmath>
 #include <iostream>
-
 #include <tuple>
 #include <utility>
 #include <vector>
-
 #include <opencv2/core.hpp>
 #include <opencv2/core/types.hpp>
 
@@ -75,9 +73,7 @@ TEST(unit_test_assign_ID, this_should_pass) {
   TrackingClass obj_(
       "../../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
       "../../models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
-  // obj.initVideoStream(0);
   cv::Mat frame = cv::imread("../../assets/faceImage.jpg");
-  // obj.videoCapture >> frame;
   auto val = obj.detectFaces(frame);
   auto ids = obj_.assignIDAndTrack(val);
 
@@ -95,9 +91,7 @@ TEST(unit_test_dist_from_camera, this_should_pass) {
   TrackingClass obj_(
       "../../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
       "../../models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
-  // obj.initVideoStream(0);
-  cv::Mat frame = cv::imread("../../assets/multi_faces.jpg");
-  // obj.videoCapture >> frame;
+  cv::Mat frame = cv::imread("../../assets/faceImage.jpg");
   auto val = obj.detectFaces(frame);
   obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
   auto distCamera = obj_.distFromCamera(frame.cols, frame.rows);
@@ -148,4 +142,70 @@ TEST(unit_test_find_depth, this_should_pass) {
   auto depth = obj_.findDepth(1);
 
   EXPECT_GT(depth, 0);
+}
+
+/**
+ * @brief Construct a new TEST object.
+ * unit test for checking the assignIDAndTrack method of class TrackingClass
+ */
+TEST(unit_test_assign_ID_2, this_should_pass) {
+  DetectionClass obj(
+      "../../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
+      "../../models/deploy.prototxt");
+  TrackingClass obj_(
+      "../../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
+      "../../models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
+  cv::VideoCapture videoCapture("../../assets/video.mp4");
+  if (!videoCapture.isOpened()) {
+    std::cerr << "Error: Could not open the video file." << std::endl;
+  }
+  cv::Mat frame;
+  while (true) {
+    videoCapture >> frame;
+    if (frame.empty()) {
+      break;
+    }
+    auto val = obj.detectFaces(frame);
+    auto ids = obj_.assignIDAndTrack(val);
+
+    EXPECT_GT(ids.size(), 0);
+  }
+}
+
+/**
+ * @brief Construct a new TEST object.
+ * unit test for checking the findDepth method of class TrackingClass
+ */
+TEST(unit_test_no_face, this_should_pass) {
+  DetectionClass obj(
+      "../../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
+      "../../models/deploy.prototxt");
+  TrackingClass obj_(
+      "../../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
+      "../../models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
+  cv::Mat frame = cv::imread("../../assets/no_face.jpg");
+  auto val = obj.detectFaces(frame);
+  obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
+  auto depth = obj_.findDepth(1);
+
+  EXPECT_GT(depth, 0);
+}
+
+/**
+ * @brief Construct a new TEST object.
+ * unit test for checking the findDepth method of class TrackingClass
+ */
+TEST(unit_test_close_face, this_should_pass) {
+  DetectionClass obj(
+      "../../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
+      "../../models/deploy.prototxt");
+  TrackingClass obj_(
+      "../../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
+      "../../models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
+  cv::Mat frame = cv::imread("../../assets/too_close.jpg");
+  auto val = obj.detectFaces(frame);
+  obj_.obstacleMapVector = obj_.assignIDAndTrack(val);
+  auto depth = obj_.findDepth(1);
+
+  EXPECT_EQ(depth, 0);
 }

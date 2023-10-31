@@ -43,9 +43,8 @@ int main() {
    * @brief Initialise a tracker class to be used for tracking obstacles
    *
    */
-  TrackingClass tracker(
-      "models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
-      "models/deploy.prototxt", x, y, z, th, tv);
+  TrackingClass tracker("models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
+                        "models/deploy.prototxt", x, y, z, th, tv);
 
   /**
    * @brief Initialise the video

@@ -85,7 +85,7 @@ std::map<int, cv::Rect> TrackingClass::assignIDAndTrack(
       if (detections.size() > 0) {
         for (int i = 0; i < detections.size(); i++) {
           distances.push_back(pow((detections[i].x - r.second.x), 2) +
-                         pow((detections[i].x - r.second.x), 2));
+                              pow((detections[i].x - r.second.x), 2));
           distMap[distances[i]] = detections[i];
         }
       } else {

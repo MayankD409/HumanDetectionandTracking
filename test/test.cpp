@@ -15,11 +15,13 @@
 #include <gtest/gtest.h>
 
 #include <iostream>
-#include <opencv2/core.hpp>
-#include <opencv2/core/types.hpp>
+
 #include <tuple>
 #include <utility>
 #include <vector>
+
+#include <opencv2/core.hpp>
+#include <opencv2/core/types.hpp>
 
 #include "detection.hpp"
 #include "tracking.hpp"

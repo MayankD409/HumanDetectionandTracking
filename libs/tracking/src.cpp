@@ -84,16 +84,15 @@ std::map<int, cv::Rect> TrackingClass::assignIDAndTrack(
       std::map<double, cv::Rect> distMap;
       if (detections.size() > 0) {
         for (int i = 0; i < detections.size(); i++) {
-          distances[i] = pow((detections[i].x - r.second.x), 2) +
-                         pow((detections[i].x - r.second.x), 2);
+          distances.push_back(pow((detections[i].x - r.second.x), 2) +
+                         pow((detections[i].x - r.second.x), 2));
           distMap[distances[i]] = detections[i];
         }
       } else {
-        distances[0] = -100;
+        distances.push_back(-100);
       }
 
-      int n = (sizeof(distances) / sizeof(distances[0]));
-      int minVal = *std::min_element(distances, distances + n);
+      int minVal = *std::min_element(distances.begin(), distances.end());
 
       if ((len < lenObjMap)) {
         if (((r.second.x < 10) || (r.second.y < 10) ||

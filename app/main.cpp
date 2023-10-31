@@ -44,8 +44,8 @@ int main() {
    *
    */
   TrackingClass tracker(
-      "../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
-      "../models/deploy.prototxt.txt", x, y, z, th, tv);
+      "models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
+      "models/deploy.prototxt", x, y, z, th, tv);
 
   /**
    * @brief Initialise the video

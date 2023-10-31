@@ -14,8 +14,12 @@
 #define TRACKING_HPP
 
 #include <map>
+#include <bits/stdc++.h>
+#include <algorithm>
+#include <numeric>
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
+#include <opencv2/imgproc.hpp>
 #include <string>
 
 #include "detection.hpp"
@@ -44,7 +48,7 @@ class TrackingClass {
    * frame after assigning unique IDs
    *
    */
-  std::vector<std::map<int, cv::Rect>> obstacleMapVector;
+  std::map<int, cv::Rect> obstacleMapVector;
   /**
    * @brief Object of class DetectionClass (part-of relation), used to access
    * the video stream and get detection of obstacles.

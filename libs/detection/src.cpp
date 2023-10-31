@@ -19,7 +19,7 @@
  */
 DetectionClass::DetectionClass(const std::string& modelPath,
                                const std::string& configPath) {
-  faceDetectionModel = cv::dnn::readNet(modelPath, configPath);
+  faceDetectionModel = cv::dnn::readNet(configPath, modelPath);
   // Initialize the face detection model with the provided paths
 }
 

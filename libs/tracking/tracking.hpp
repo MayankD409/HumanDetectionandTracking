@@ -110,7 +110,7 @@ class TrackingClass {
    * robot reference frame.
    */
   std::map<int, std::tuple<double, double, double>> distFromCar(
-      const std::map<int, std::tuple<double, double, double>>& input);
+      std::map<int, std::tuple<double, double, double>>& input);
 
 };
 

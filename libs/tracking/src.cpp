@@ -140,8 +140,15 @@ TrackingClass::distFromCamera(int frameWidth, int frameHeight) {
  * 
  */
 std::map<int, std::tuple<double, double, double>> TrackingClass::distFromCar(
-    const std::map<int, std::tuple<double, double, double>>& input) {
+    std::map<int, std::tuple<double, double, double>>& input) {
   std::map<int, std::tuple<double, double, double>> distances;
 
-  return distances;
+    double x, y;
+    for (const auto & r : input){
+        double z = std::get<2>(input[r.first]);
+        x = 2*z*tan(horizontalFOI/2)*std::get<0>(input[r.first])/480; //width
+        y = 2*z*tan(verticalFOI/2)*std::get<1>(input[r.first])/640; //height
+        distances[r.first] = std::make_tuple(x+xOffset, z+yOffset, -y+zOffset); // add each offset to each coord from class declar var
+    }
+    return distances;
 }

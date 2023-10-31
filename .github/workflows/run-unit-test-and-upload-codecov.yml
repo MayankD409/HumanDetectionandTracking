@@ -41,6 +41,7 @@ jobs:
       - name: Install build packages
         run: |
           sudo apt update
+          sudo apt install gcc g++
           sudo apt install -y software-properties-common
           sudo apt install -y doxygen lcov gcovr
           

@@ -156,9 +156,6 @@ TEST(unit_test_assign_ID_2, this_should_pass) {
       "../../models/res10_300x300_ssd_iter_140000_fp16.caffemodel",
       "../../models/deploy.prototxt", 0, 0, 0, 1.57, 0.7);
   cv::VideoCapture videoCapture("../../assets/video.mp4");
-  if (!videoCapture.isOpened()) {
-    std::cerr << "Error: Could not open the video file." << std::endl;
-  }
   cv::Mat frame;
   while (true) {
     videoCapture >> frame;

@@ -103,9 +103,9 @@ std::map<int, cv::Rect> TrackingClass::assignIDAndTrack(
         } else if (((r.second.x < 10) || (r.second.y < 10) ||
                     (r.second.x + r.second.width > 640 - 10) ||
                     (r.second.y + r.second.height > 480 - 10)) &&
-                   (minVal > 4500)) {
+                   (minVal > 2500)) {
           obstacleMapVector.erase(r.first);
-        } else if ((minVal < 0) || (minVal > 4500)) {
+        } else if ((minVal < 0) || (minVal > 2500)) {
           continue;
         } else if (detections.size() > 0) {
           obstacleMapVector[r.first] = distMap[minVal];
@@ -151,9 +151,9 @@ std::map<int, std::tuple<double, double, double>> TrackingClass::distFromCamera(
   std::map<int, std::tuple<double, double, double>> distances;
   for (const auto& r : obstacleMapVector) {
     double z = findDepth(r.first);
-    distances[r.first] =
-        std::make_tuple(r.second.x - frameWidth / 2 + r.second.width / 2,
-                        r.second.y - frameHeight / 2 + r.second.height / 2, z);
+    double xDist = r.second.x - (frameWidth / 2) + (r.second.width / 2);
+    double yDist = r.second.y - (frameHeight / 2) + (r.second.height / 2);
+    distances[r.first] = std::make_tuple(xDist, yDist, z);
   }
   return distances;
 }
@@ -184,9 +184,11 @@ std::map<int, std::tuple<double, double, double>> TrackingClass::distFromCar(
         480;  // width
     y = 2 * z * tan(verticalFOI / 2) * std::get<1>(input[r.first]) /
         640;  // height
-    distances[r.first] = std::make_tuple(
-        x + xOffset, z + yOffset,
-        -y + zOffset);  // add each offset to each coord from class declar var
+    double xDist = x + xOffset;
+    double yDist = z + yOffset;
+    double zDist = -y + zOffset;
+    distances[r.first] = std::make_tuple(xDist, yDist, zDist);
+        // add each offset to each coord from class declar var
   }
   return distances;
 }

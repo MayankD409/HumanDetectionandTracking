@@ -230,6 +230,12 @@ You can also get code coverage report for the *human-tracker* target, instead of
 This generates a index.html page in the build/app_coverage sub-directory that can be viewed locally in a web browser.
 ```
 
+# CodeCov Outputs
+Unit tests were chosen to try to meet all run condition cases, but some were still missed.
+Thus coverage report is reduced in TrackingClass.
+<br>
+DetectionClass requires to initialise a VideoStream, which is not possible in GitHub Actions.
+
 
 ## compile_commands.json Errors
 In case of error regarding the generation of compile_commands.json file,

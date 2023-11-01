@@ -94,6 +94,11 @@ int main() {
      *
      */
     for (const auto& r : tracker.obstacleMapVector) {
+      std::cout << "Obstacle " << r.first << " at point ("
+                << static_cast<int>(std::get<0>(carDistance[r.first])) << ", "
+                << static_cast<int>(std::get<1>(carDistance[r.first])) << ", "
+                << static_cast<int>(std::get<2>(carDistance[r.first])) << ")"
+                << std::endl;
       cv::rectangle(frame, r.second, color, 4);
       cv::putText(frame,
                   std::to_string(r.first) + ": (" +

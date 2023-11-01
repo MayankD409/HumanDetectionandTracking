@@ -167,13 +167,16 @@ It consists of four methods:-
   # or, update the existing compile_commands.json
   bear --append -- cmake --build build/
 
-# Run program for testing the actual application:
-  ./build/app/human-tracker
-
 # Clean
   cmake --build build/ --target clean
 # Clean and start over:
   rm -rf build/
+```
+
+## Run the Applicaiton
+```bash
+# Run program for testing the actual application:
+  ./build/app/human-tracker
 ```
 
 ## Running Unit Tests

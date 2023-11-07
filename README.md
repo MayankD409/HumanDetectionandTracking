@@ -1,10 +1,5 @@
 ![CICD Workflow status](https://github.com/MayankD409/Human_Tracking_CPP/actions/workflows/run-unit-test-and-upload-codecov.yml/badge.svg) [![codecov](https://codecov.io/gh/MayankD409/Human_Tracking_CPP/graph/badge.svg?token=5CKBQ8V2WE)](https://codecov.io/gh/MayankD409/Human_Tracking_CPP) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-This repository consists of deliverables for the Midterm Project for,
- - Lowell Lobo (120095719)
- - Kautilya Chappidi (120380204)
- - Mayank Deshpande (120387333)
-
 # Project Overview
 
 Perception is essential for object detection, environmental awareness, path planning and control; through perception, a system can truly be considered autonomous. Acme requires the development of a perception component in its autonomous car system, and a human obstacle detection and tracking module needs to be built.
@@ -32,22 +27,6 @@ The camera used for perception will be placed on the top of the car. The camera 
 ## Constraints
 
 The module uses a monocular camera and is unable to handle occlusions. Also, the monocular camera cannot perform precise depth calculation and thus would require a deep learning model for accurate estimation. The runtime fps and memory management depend on the physical constraints of the system.
-
-
-# Personnel
-
-Kautilya Chappiddi:-
-<br>
-Graduate Student in Enginnering - Robotics at University of Maryland, College Park
-
-Lowell Lobo:-
-<br>
-Graduate Student in Enginnering - Robotics at University of Maryland, College Park
-
-Mayank Deshpande:-
-<br>
-Graduate Student in Enginnering - Robotics at University of Maryland, College Park
-
 
 # Process
 

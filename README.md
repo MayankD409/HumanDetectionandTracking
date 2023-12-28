@@ -1,4 +1,4 @@
-![CICD Workflow status](https://github.com/MayankD409/Human_Tracking_CPP/actions/workflows/run-unit-test-and-upload-codecov.yml/badge.svg) [![codecov](https://codecov.io/gh/MayankD409/Human_Tracking_CPP/graph/badge.svg?token=5CKBQ8V2WE)](https://codecov.io/gh/MayankD409/Human_Tracking_CPP) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![CICD Workflow status](https://github.com/MayankD409/Human_Tracking_CPP/actions/workflows/run-unit-test-and-upload-codecov.yml/badge.svg) [![codecov](https://codecov.io/gh/MayankD409/HumanDetectionandTracking/graph/badge.svg?token=5CKBQ8V2WE)](https://codecov.io/gh/MayankD409/HumanDetectionandTracking) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 # Project Overview
 
